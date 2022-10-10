@@ -1,0 +1,106 @@
+package com.whenyourapprun.elevator.android
+
+import android.content.Intent
+import android.content.res.Resources
+import android.os.Bundle
+import androidx.activity.ComponentActivity
+import androidx.activity.compose.setContent
+import androidx.annotation.StringRes
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.*
+import androidx.compose.material.LinearProgressIndicator
+import androidx.compose.material.Surface
+import androidx.compose.material.Text
+import androidx.compose.runtime.*
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalConfiguration
+import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
+import java.util.concurrent.Executors
+import java.util.concurrent.TimeUnit
+import kotlin.concurrent.timer
+
+class IntroActivity : ComponentActivity() {
+
+    private var seconds by mutableStateOf(0)
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContent {
+            Surface(color = Color.LightGray) {
+                if (seconds < 100) {
+                    IntroContent(seconds)
+                } else {
+                    val intent = Intent(applicationContext, MainActivity::class.java)
+                    startActivity(intent)
+                    finish()
+                }
+            }
+            timer(period = 50) {
+                seconds++
+                if (seconds > 100) {
+                    this.cancel()
+                }
+            }
+        }
+    }
+}
+
+@Composable
+fun IntroContent(sec: Int) {
+    Column(
+        modifier = Modifier
+            .fillMaxWidth()
+            .fillMaxHeight(),
+        verticalArrangement = Arrangement.Center
+    ) {
+        Box(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(16.dp, 0.dp)
+                .background(Color.White)
+        ) {
+            Column() {
+                Spacer(modifier = Modifier.height(16.dp))
+                Text(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(16.dp, 0.dp)
+                        .background(Color.White),
+                    textAlign = TextAlign.Center,
+                    fontSize = 21.sp,
+                    color = Color.DarkGray,
+                    text = stringResource(id = R.string.app_name)
+                )
+                Spacer(modifier = Modifier.height(16.dp))
+                LinearProgressIndicator(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .height(16.dp)
+                        .padding(16.dp, 0.dp),
+                    backgroundColor = Color.LightGray,
+                    color = Color.DarkGray,
+                    progress = sec.toFloat() / 100.0f
+                )
+                Spacer(modifier = Modifier.height(16.dp))
+            }
+        }
+    }
+}
+
+@Composable
+@ReadOnlyComposable
+private fun stringResource(@StringRes id: Int): String {
+    val resources = resources()
+    return resources.getString(id)
+}
+
+@Composable
+@ReadOnlyComposable
+private fun resources(): Resources {
+    LocalConfiguration.current
+    return LocalContext.current.resources
+}
