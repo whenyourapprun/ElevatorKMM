@@ -19,6 +19,7 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import java.util.Timer
 import java.util.concurrent.Executors
 import java.util.concurrent.TimeUnit
 import kotlin.concurrent.timer
@@ -31,18 +32,18 @@ class IntroActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             Surface(color = Color.LightGray) {
-                if (seconds < 100) {
-                    IntroContent(seconds)
-                } else {
-                    val intent = Intent(applicationContext, MainActivity::class.java)
-                    startActivity(intent)
-                    finish()
-                }
+                IntroContent(seconds)
             }
             timer(period = 50) {
                 seconds++
                 if (seconds > 100) {
+                    // 타이머 중지
                     this.cancel()
+                    // 메인화면으로 이동
+                    val intent = Intent(applicationContext, MainActivity::class.java)
+                    startActivity(intent)
+                    overridePendingTransition(R.anim.fade_in, R.anim.fade_out)
+                    finish()
                 }
             }
         }
