@@ -16,7 +16,10 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import java.util.Timer
@@ -53,9 +56,7 @@ class IntroActivity : ComponentActivity() {
 @Composable
 fun IntroContent(sec: Int) {
     Column(
-        modifier = Modifier
-            .fillMaxWidth()
-            .fillMaxHeight(),
+        modifier = Modifier.fillMaxSize(),
         verticalArrangement = Arrangement.Center
     ) {
         Box(
@@ -69,12 +70,12 @@ fun IntroContent(sec: Int) {
                 Text(
                     modifier = Modifier
                         .fillMaxWidth()
-                        .padding(16.dp, 0.dp)
+                        .padding(16.dp, 8.dp)
                         .background(Color.White),
                     textAlign = TextAlign.Center,
                     fontSize = 21.sp,
                     color = Color.DarkGray,
-                    text = stringResource(id = R.string.app_name)
+                    text = stringResource(R.string.app_name)
                 )
                 Spacer(modifier = Modifier.height(16.dp))
                 LinearProgressIndicator(
@@ -92,16 +93,8 @@ fun IntroContent(sec: Int) {
     }
 }
 
+@Preview
 @Composable
-@ReadOnlyComposable
-private fun stringResource(@StringRes id: Int): String {
-    val resources = resources()
-    return resources.getString(id)
-}
-
-@Composable
-@ReadOnlyComposable
-private fun resources(): Resources {
-    LocalConfiguration.current
-    return LocalContext.current.resources
+fun PreviewIntro() {
+    IntroContent(69)
 }
