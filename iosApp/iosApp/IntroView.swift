@@ -32,7 +32,7 @@ struct IntroView: View {
             }
             .padding(16.0)
             .fullScreenCover(isPresented: $showMainScreen) {
-                MainView()
+                MainView(viewModel: MainView.ViewModel())
             }
         }
 	}

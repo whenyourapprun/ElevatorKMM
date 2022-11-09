@@ -26,7 +26,7 @@ kotlin {
                 implementation("io.ktor:ktor-client-content-negotiation:$ktorVersion")
                 implementation("io.ktor:ktor-serialization-kotlinx-json:$ktorVersion")
                 // 매뉴얼대로 여기 추가했는데 실제 코드에서 먹지 않은거 같음, 2022.11.08
-                implementation("io.ktor:ktor-serialization-kotlinx-xml:$ktorVersion")
+                //implementation("io.ktor:ktor-serialization-kotlinx-xml:$ktorVersion")
             }
         }
         val commonTest by getting {
