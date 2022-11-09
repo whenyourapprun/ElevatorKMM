@@ -15,23 +15,13 @@ data class RocketLaunch (
     val launchSuccess: Boolean?,
 )
 
-data class ResponseElevator(
-    val response: ElevatorInformation
-)
+data class ResponseElevator(val response: ElevatorInformation)
 
-data class ElevatorInformation(
-    val header: Header,
-    val body: Body
-)
+data class ElevatorInformation(val header: Header, val body: Body)
 
-data class Header(
-    val resultCode: String,
-    val resultMsg: String
-)
+data class Header(val resultCode: String, val resultMsg: String)
 
-data class Body(
-    val items: List<Item>
-)
+data class Body(val items: List<Item>)
 
 data class Item(
     val address1: String,

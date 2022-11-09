@@ -11,14 +11,7 @@ class Elevator {
     @Throws(Exception::class)
     suspend fun getElevatorInfo(elevatorNo: String): ResponseElevator {
         val elevatorInfoStr = getElevatorInformation(elevatorNo)
-        // 여기서 문자열로 온 값을 구조체로 변경해서 내려주자.
-        //val responseContent = elevatorInfoStr.split("<response>", "</response>")[1]
-        //val headerContent = responseContent.split("<header>", "</header>")[1]
-        //val resultCode = headerContent.split("<resultCode>", "</resultCode>")[1]
-        //println("elevatorInfoStr $elevatorInfoStr")
-        //val returnStr = elevatorInfoStr//.joinToString("")
-        val responseElevator = stringToResponseElevator(elevatorInfoStr)
-        return responseElevator
+        return stringToResponseElevator(elevatorInfoStr)
     }
 
     private fun stringToResponseElevator(rawString: String): ResponseElevator {

@@ -26,6 +26,7 @@ kotlin {
                 implementation("io.ktor:ktor-client-content-negotiation:$ktorVersion")
                 implementation("io.ktor:ktor-serialization-kotlinx-json:$ktorVersion")
                 // 매뉴얼대로 여기 추가했는데 실제 코드에서 먹지 않은거 같음, 2022.11.08
+                // 아이폰 쪽에서 phasescriptexecution 오류 발생하여 주석처리 하니까 해결
                 //implementation("io.ktor:ktor-serialization-kotlinx-xml:$ktorVersion")
             }
         }
