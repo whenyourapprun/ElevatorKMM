@@ -17,13 +17,20 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.whenyourapprun.elevator.Elevator
+import com.whenyourapprun.elevator.android.ui.theme.ElevatorTheme
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            Surface(color = Color.LightGray) {
-                MainApp()
+            ElevatorTheme {
+                Surface(
+                    modifier = Modifier.fillMaxSize(),
+                    color = MaterialTheme.colors.background
+                ) {
+                    MainApp()
+                }
             }
         }
     }
@@ -47,7 +54,16 @@ private fun MainScreen(modifier: Modifier = Modifier) {
             .background(Color.LightGray)
     ) {
         MainView("Top View")
-        MainView("Content View")
+        val scope = rememberCoroutineScope()
+        var text by remember { mutableStateOf("Loading") }
+        LaunchedEffect(key1 = true) {
+            text = try {
+                Elevator().getElevatorInfo("8088381").response.header.resultMsg
+            } catch (e: Exception) {
+                e.localizedMessage ?: "error"
+            }
+        }
+        MainView(text)
         MainView("Bottom View")
     }
 }
@@ -110,5 +126,7 @@ private fun BottomNavigation(modifier: Modifier = Modifier) {
 @Preview
 @Composable
 fun PreviewMain() {
-    MainApp()
+    ElevatorTheme {
+        MainApp()
+    }
 }
