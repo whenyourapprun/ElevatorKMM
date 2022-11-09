@@ -10,31 +10,20 @@ import SwiftUI
 import shared
 
 struct MainView: View {
-    @ObservedObject private(set) var viewModel: ViewModel
     var body: some View {
-        Text(viewModel.text)
-    }
-}
-
-extension MainView {
-    class ViewModel: ObservableObject {
-        @Published var text = "Loading..."
-        init() {
-            Elevator().getElevatorInfo(elevatorNo: "8088381", completionHandler: { response, error in
-                DispatchQueue.main.async {
-                    if let elevatorInfo = response {
-                        self.text = elevatorInfo.response.header.resultMsg
-                    } else {
-                        self.text = error?.localizedDescription ?? "error"
-                    }
-                }
-            })
+        VStack {
+            Text("엘리베이터")
+            Text("퍼스널컬러")
+            Text("MBTI")
+            Text("마이페이지")
+            Text("별명 수정")
         }
+        .statusBarHidden(true)
     }
 }
 
 struct MainView_Previews: PreviewProvider {
     static var previews: some View {
-        MainView(viewModel: MainView.ViewModel())
+        MainView()
     }
 }

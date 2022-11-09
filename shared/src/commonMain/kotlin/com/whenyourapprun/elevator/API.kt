@@ -8,9 +8,6 @@ import io.ktor.serialization.kotlinx.json.*
 import kotlinx.serialization.json.Json
 //import io.ktor.serialization.kotlinx.xml.*
 
-val elevatorServer = "http://openapi.elevator.go.kr/openapi/service/BuldElevatorService"
-val getBuldElvtrList = "/getBuldElvtrList"
-val serviceKey = "yt%2FgvrpYB2V8w2izxiyXB85YfSc47ucFNIPGFnaKTs5lMayhS0dU3ScipYChG9COcy8wSA5RetxrcUBpdMvH%2Bw%3D%3D"
 val httpClient = HttpClient {
     install(ContentNegotiation) {
         json(Json {
@@ -34,6 +31,9 @@ suspend fun getRocketLaunch(): RocketLaunch {
 }
 
 suspend fun getElevatorInformation(elevatorNo: String): String {
+    val elevatorServer = Environment.elevatorServer
+    val getBuldElvtrList = Environment.getBuldElvtrList
+    val serviceKey = Environment.serviceKey
     val url = "$elevatorServer$getBuldElvtrList?serviceKey=$serviceKey&elevator_no=$elevatorNo"
     return xmlHttpClient.get(url).body()
 }

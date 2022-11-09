@@ -32,9 +32,10 @@ struct IntroView: View {
             }
             .padding(16.0)
             .fullScreenCover(isPresented: $showMainScreen) {
-                MainView(viewModel: MainView.ViewModel())
+                MainView()
             }
         }
+        .statusBarHidden(true)
 	}
 }
 
