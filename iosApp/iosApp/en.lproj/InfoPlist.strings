@@ -1,0 +1,9 @@
+/* 
+  InfoPlist.strings
+  iosApp
+
+  Created by whenyourapprun on 2022/11/10.
+  Copyright © 2022 orgName. All rights reserved.
+*/
+"CFBundleDisplayName" = "Elevator";
+"CFBundleName" = "Elevator";
