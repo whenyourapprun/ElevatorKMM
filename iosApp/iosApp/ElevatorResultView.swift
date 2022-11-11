@@ -12,7 +12,7 @@ import shared
 struct ElevatorResultView: View {
     @EnvironmentObject var userStore: UserStore
     @State private var text = "Loading"
-    @State private var items: [Item]?
+    //@State private var items: [Item]?
     var body: some View {
         NavigationView {
             ZStack {
@@ -20,10 +20,36 @@ struct ElevatorResultView: View {
                 VStack {
                     Text(text)
                     List {
-                        if let itemList = items {
+                        if let itemList = userStore.responseElevator?.response.body.items {
                             ForEach(itemList, id: \.self) { item in
-                                Row(title: "address1", detail: item.address1)
-                                Row(title: "address2", detail: item.address2)
+                                Section {
+                                    Row(title: "address1", detail: item.address1)
+                                    Row(title: "address2", detail: item.address2)
+                                    Row(title: "applcBeDt", detail: item.applcBeDt)
+                                    Row(title: "applcEnDt", detail: item.applcEnDt)
+                                    Row(title: "areaNm", detail: item.areaNm)
+                                    Row(title: "buldMgtNo1", detail: item.buldMgtNo1)
+                                    Row(title: "buldMgtNo2", detail: item.buldMgtNo2)
+                                    Row(title: "buldNm", detail: item.buldNm)
+                                    Row(title: "elevatorNo", detail: item.elevatorNo)
+                                    Row(title: "elvtrAsignNo", detail: item.elvtrAsignNo)
+                                    Row(title: "elvtrDetailForm", detail: item.elvtrDetailForm)
+                                    Row(title: "elvtrDivNm", detail: item.elvtrDivNm)
+                                    Row(title: "elvtrForm", detail: item.elvtrForm)
+                                    Row(title: "elvtrKindNm", detail: item.elvtrKindNm)
+                                    Row(title: "elvtrSttsNm", detail: item.elvtrSttsNm)
+                                    Row(title: "frstInstallationDe", detail: item.frstInstallationDe)
+                                    Row(title: "groundFloorCnt", detail: item.groundFloorCnt)
+                                    Row(title: "installationDe", detail: item.installationDe)
+                                    Row(title: "installationPlace", detail: item.installationPlace)
+                                    Row(title: "liveLoad", detail: item.liveLoad)
+                                    Row(title: "ratedCap", detail: item.ratedCap)
+                                    Row(title: "resultNm", detail: item.resultNm)
+                                    Row(title: "shuttleFloorCnt", detail: item.shuttleFloorCnt)
+                                    Row(title: "shuttleSection", detail: item.shuttleSection)
+                                    Row(title: "sigunguNm", detail: item.sigunguNm)
+                                    Row(title: "undgrndFloorCnt", detail: item.undgrndFloorCnt)
+                                }
                             }
                         }
                     }
@@ -45,8 +71,7 @@ struct ElevatorResultView: View {
             .onAppear(perform: {
                 // 화면 나타날 때 자료 가져와서 표시하자.
                 if let responseElevator = userStore.responseElevator {
-                    text = responseElevator.response.header.resultMsg
-                    items = responseElevator.response.body.items
+                    text = responseElevator.response.body.items[0].resultNm
                 } else {
                     text = "error"
                 }

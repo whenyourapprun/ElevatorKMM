@@ -31,6 +31,7 @@ data class Item(
     val areaNm: String,
     val buldMgtNo1: String,
     val buldMgtNo2: String,
+    val buldNm: String,
     val elevatorNo: String,
     val elvtrAsignNo: String,
     val elvtrDetailForm: String,
