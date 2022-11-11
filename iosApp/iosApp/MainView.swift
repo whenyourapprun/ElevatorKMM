@@ -28,68 +28,71 @@ struct MainView: View {
     private let NickChangeGuide: LocalizedStringKey = "NickChangeGuide"
     
     var body: some View {
-        VStack {
-            CardView(title: Elevator, guide: ElevatorGuide, nextIndex: 0)
-            CardView(title: MyPage, guide: MyPageGuide, nextIndex: 1)
-            CardView(title: NickChange, guide: NickChangeGuide, nextIndex: 2)
-            Spacer()
-            HStack {
-                Text("1")
-                    .font(.title)
-                    .foregroundColor(select_1 ? .white : .text)
-                    .frame(maxWidth: .infinity, maxHeight: 70.0)
-                    .background(select_1 ? Color.selected : Color.not_selected)
-                    .cornerRadius(5.0)
-                    .scaleEffect(isAni_1 ? 0.9 : 1)
-                    .animation(ani)
-                    .onTapGesture {
-                        isAni_1 = true
-                        select_1 = true
-                        select_2 = false
-                        select_3 = false
-                        DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(100)) {
-                            isAni_1 = false
+        NavigationView {
+            VStack {
+                CardView(title: Elevator, guide: ElevatorGuide, nextIndex: 0)
+                CardView(title: MyPage, guide: MyPageGuide, nextIndex: 1)
+                CardView(title: NickChange, guide: NickChangeGuide, nextIndex: 2)
+                Spacer()
+                HStack {
+                    Text("1")
+                        .font(.title)
+                        .foregroundColor(select_1 ? .white : .text)
+                        .frame(maxWidth: .infinity, maxHeight: 70.0)
+                        .background(select_1 ? Color.selected : Color.not_selected)
+                        .cornerRadius(5.0)
+                        .scaleEffect(isAni_1 ? 0.9 : 1)
+                        .animation(ani)
+                        .onTapGesture {
+                            isAni_1 = true
+                            select_1 = true
+                            select_2 = false
+                            select_3 = false
+                            DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(100)) {
+                                isAni_1 = false
+                            }
                         }
-                    }
-                Text("2")
-                    .font(.title)
-                    .foregroundColor(select_2 ? .white : .text)
-                    .frame(maxWidth: .infinity, maxHeight: 70.0)
-                    .background(select_2 ? Color.selected : Color.not_selected)
-                    .cornerRadius(5.0)
-                    .scaleEffect(isAni_2 ? 0.9 : 1)
-                    .animation(ani)
-                    .onTapGesture {
-                        isAni_2 = true
-                        select_1 = false
-                        select_2 = true
-                        select_3 = false
-                        DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(100)) {
-                            isAni_2 = false
+                    Text("2")
+                        .font(.title)
+                        .foregroundColor(select_2 ? .white : .text)
+                        .frame(maxWidth: .infinity, maxHeight: 70.0)
+                        .background(select_2 ? Color.selected : Color.not_selected)
+                        .cornerRadius(5.0)
+                        .scaleEffect(isAni_2 ? 0.9 : 1)
+                        .animation(ani)
+                        .onTapGesture {
+                            isAni_2 = true
+                            select_1 = false
+                            select_2 = true
+                            select_3 = false
+                            DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(100)) {
+                                isAni_2 = false
+                            }
                         }
-                    }
-                Text("3")
-                    .font(.title)
-                    .foregroundColor(select_3 ? .white : .text)
-                    .frame(maxWidth: .infinity, maxHeight: 70.0)
-                    .background(select_3 ? Color.selected : Color.not_selected)
-                    .cornerRadius(5.0)
-                    .scaleEffect(isAni_3 ? 0.9 : 1)
-                    .animation(ani)
-                    .onTapGesture {
-                        isAni_3 = true
-                        select_1 = false
-                        select_2 = false
-                        select_3 = true
-                        DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(100)) {
-                            isAni_3 = false
+                    Text("3")
+                        .font(.title)
+                        .foregroundColor(select_3 ? .white : .text)
+                        .frame(maxWidth: .infinity, maxHeight: 70.0)
+                        .background(select_3 ? Color.selected : Color.not_selected)
+                        .cornerRadius(5.0)
+                        .scaleEffect(isAni_3 ? 0.9 : 1)
+                        .animation(ani)
+                        .onTapGesture {
+                            isAni_3 = true
+                            select_1 = false
+                            select_2 = false
+                            select_3 = true
+                            DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(100)) {
+                                isAni_3 = false
+                            }
                         }
-                    }
+                }
+                .padding([.horizontal], 16.0)
             }
-            .padding([.horizontal], 16.0)
+            .background(Color.back.ignoresSafeArea(.all))
+            .statusBarHidden(true)
+            .navigationBarHidden(true)
         }
-        .background(Color.back.ignoresSafeArea(.all))
-        .statusBarHidden(true)
     }
 }
 
@@ -141,7 +144,6 @@ struct CardView: View {
         .fullScreenCover(isPresented: $showNextView) {
             if nextIndex == 0 {
                 ElevatorView()
-                //ElevatorView(viewModel: ElevatorView.ViewModel())
             }
         }
     }

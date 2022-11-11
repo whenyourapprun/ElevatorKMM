@@ -15,6 +15,7 @@
 		7E620D27291B8C7400B9B944 /* Utility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E620D26291B8C7400B9B944 /* Utility.swift */; };
 		7E620D2A291CD49E00B9B944 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 7E620D2C291CD49E00B9B944 /* Localizable.strings */; };
 		7E620D30291CDE0B00B9B944 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 7E620D32291CDE0B00B9B944 /* InfoPlist.strings */; };
+		7E620D37291DD6EF00B9B944 /* ElevatorResultView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E620D36291DD6EF00B9B944 /* ElevatorResultView.swift */; };
 		7E8CFD8F28F67FFE00599355 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E8CFD8E28F67FFE00599355 /* MainView.swift */; };
 /* End PBXBuildFile section */
 
@@ -44,6 +45,7 @@
 		7E620D2D291CD57800B9B944 /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/Localizable.strings; sourceTree = "<group>"; };
 		7E620D31291CDE0B00B9B944 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		7E620D33291CDE0F00B9B944 /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		7E620D36291DD6EF00B9B944 /* ElevatorResultView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ElevatorResultView.swift; sourceTree = "<group>"; };
 		7E8CFD8E28F67FFE00599355 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -91,6 +93,7 @@
 				7555FF82242A565900829871 /* IntroView.swift */,
 				7E8CFD8E28F67FFE00599355 /* MainView.swift */,
 				7E620D24291B4D8600B9B944 /* ElevatorView.swift */,
+				7E620D36291DD6EF00B9B944 /* ElevatorResultView.swift */,
 				7E620D26291B8C7400B9B944 /* Utility.swift */,
 				7E620D32291CDE0B00B9B944 /* InfoPlist.strings */,
 				7E620D2C291CD49E00B9B944 /* Localizable.strings */,
@@ -203,6 +206,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				2152FB042600AC8F00CF470E /* iOSApp.swift in Sources */,
+				7E620D37291DD6EF00B9B944 /* ElevatorResultView.swift in Sources */,
 				7E620D27291B8C7400B9B944 /* Utility.swift in Sources */,
 				7E8CFD8F28F67FFE00599355 /* MainView.swift in Sources */,
 				7555FF83242A565900829871 /* IntroView.swift in Sources */,
