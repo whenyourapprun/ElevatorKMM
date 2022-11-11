@@ -54,7 +54,7 @@ class Elevator {
                 val shuttleSection = item.split("<shuttleSection>", "</shuttleSection>")[1]
                 val sigunguNm = item.split("<sigunguNm>", "</sigunguNm>")[1]
                 val undgrndFloorCnt = item.split("<undgrndFloorCnt>", "</undgrndFloorCnt>")[1]
-                val addItem = Item(address1, address2, applcBeDt, applcEnDt, areaNm, buldMgtNo1, buldMgtNo2, elevatorNo, elvtrAsignNo, elvtrDetailForm, elvtrDivNm, elvtrForm, elvtrKindNm, elvtrSttsNm, frstInstallationDe, groundFloorCnt, installationDe, installationPlace, liveLoad, ratedCap, resultNm, shuttleFloorCnt, shuttleSection, sigunguNm, undgrndFloorCnt)
+                val addItem = Item(address1, address2, applcBeDt, applcEnDt, areaNm, buldMgtNo1, buldMgtNo2, buldNm, elevatorNo, elvtrAsignNo, elvtrDetailForm, elvtrDivNm, elvtrForm, elvtrKindNm, elvtrSttsNm, frstInstallationDe, groundFloorCnt, installationDe, installationPlace, liveLoad, ratedCap, resultNm, shuttleFloorCnt, shuttleSection, sigunguNm, undgrndFloorCnt)
                 itemList.add(addItem)
             }
         }

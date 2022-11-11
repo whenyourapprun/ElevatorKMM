@@ -30,7 +30,7 @@ struct ElevatorResultView: View {
                                     Row(title: "areaNm", detail: item.areaNm)
                                     Row(title: "buldMgtNo1", detail: item.buldMgtNo1)
                                     Row(title: "buldMgtNo2", detail: item.buldMgtNo2)
-                                    Row(title: "buldNm", detail: item.buldNm)
+                                    /*/Row(title: "buldNm", detail: item.buldNm)
                                     Row(title: "elevatorNo", detail: item.elevatorNo)
                                     Row(title: "elvtrAsignNo", detail: item.elvtrAsignNo)
                                     Row(title: "elvtrDetailForm", detail: item.elvtrDetailForm)
@@ -49,6 +49,7 @@ struct ElevatorResultView: View {
                                     Row(title: "shuttleSection", detail: item.shuttleSection)
                                     Row(title: "sigunguNm", detail: item.sigunguNm)
                                     Row(title: "undgrndFloorCnt", detail: item.undgrndFloorCnt)
+                                     // */
                                 }
                             }
                         }
