@@ -109,38 +109,43 @@ struct CardView: View {
     @State private var showNextView = false
     
     var body: some View {
-        VStack {
-            HStack {
-                Spacer()
-                VStack {
-                    Text(title)
-                        .font(.largeTitle)
-                        .fontWeight(.bold)
-                        .foregroundColor(.text)
-                        .padding()
-                    Text(guide)
-                        .font(.body)
-                        .foregroundColor(.selected)
-                        .padding()
+        ZStack {
+            Color.back.edgesIgnoringSafeArea(.all)
+            VStack {
+                HStack {
+                    Spacer()
+                    VStack {
+                        Text(title)
+                            .font(.largeTitle)
+                            .fontWeight(.bold)
+                            .foregroundColor(.text)
+                            .padding()
+                        Text(guide)
+                            .font(.body)
+                            .foregroundColor(.selected)
+                            .padding()
+                    }
+                    Spacer()
                 }
-                Spacer()
+                .padding()
             }
-            .padding()
-        }
-        .background(Color.white)
-        .cornerRadius(15.0)
-        .padding([.all], 16.0)
-        .scaleEffect(isAnimated ? 0.9 : 1)
-        .animation(ani)
-        .onTapGesture {
-            isAnimated = true
-            DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(100)) {
-                isAnimated = false
-                if nextIndex == 0 {
-                    showNextView = true
+            .background(Color.white)
+            .cornerRadius(15.0)
+            .padding([.all], 16.0)
+            .scaleEffect(isAnimated ? 0.9 : 1)
+            .animation(ani)
+            .onTapGesture {
+                isAnimated = true
+                DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(100)) {
+                    isAnimated = false
+                    if nextIndex == 0 {
+                        showNextView = true
+                    }
                 }
             }
         }
+        .statusBarHidden(true)
+        .navigationBarHidden(true)
         .fullScreenCover(isPresented: $showNextView) {
             if nextIndex == 0 {
                 ElevatorView()
