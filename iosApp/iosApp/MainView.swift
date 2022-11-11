@@ -29,9 +29,9 @@ struct MainView: View {
     
     var body: some View {
         VStack {
-            CardView(title: Elevator, guide: ElevatorGuide)
-            CardView(title: MyPage, guide: MyPageGuide)
-            CardView(title: NickChange, guide: NickChangeGuide)
+            CardView(title: Elevator, guide: ElevatorGuide, nextIndex: 0)
+            CardView(title: MyPage, guide: MyPageGuide, nextIndex: 1)
+            CardView(title: NickChange, guide: NickChangeGuide, nextIndex: 2)
             Spacer()
             HStack {
                 Text("1")
@@ -94,10 +94,17 @@ struct MainView: View {
 }
 
 struct CardView: View {
+    // 제목과 설명
     var title: LocalizedStringKey
     var guide: LocalizedStringKey
+    // 전환 화면 0 Elevator, 1 MyPage, 2 Nick, 나머지 MainView
+    var nextIndex: Int
+    // 애니메이션
     @State private var isAnimated = false
     var ani: Animation { Animation.linear(duration: 0.2) }
+    // 뷰 전환
+    @State private var showNextView = false
+    
     var body: some View {
         VStack {
             HStack {
@@ -126,6 +133,15 @@ struct CardView: View {
             isAnimated = true
             DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(100)) {
                 isAnimated = false
+                if nextIndex == 0 {
+                    showNextView = true
+                }
+            }
+        }
+        .fullScreenCover(isPresented: $showNextView) {
+            if nextIndex == 0 {
+                ElevatorView()
+                //ElevatorView(viewModel: ElevatorView.ViewModel())
             }
         }
     }

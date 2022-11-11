@@ -87,14 +87,14 @@
 			isa = PBXGroup;
 			children = (
 				058557BA273AAA24004C7B11 /* Assets.xcassets */,
+				2152FB032600AC8F00CF470E /* iOSApp.swift */,
 				7555FF82242A565900829871 /* IntroView.swift */,
 				7E8CFD8E28F67FFE00599355 /* MainView.swift */,
+				7E620D24291B4D8600B9B944 /* ElevatorView.swift */,
 				7E620D26291B8C7400B9B944 /* Utility.swift */,
 				7E620D32291CDE0B00B9B944 /* InfoPlist.strings */,
 				7E620D2C291CD49E00B9B944 /* Localizable.strings */,
-				7E620D24291B4D8600B9B944 /* ElevatorView.swift */,
 				7555FF8C242A565B00829871 /* Info.plist */,
-				2152FB032600AC8F00CF470E /* iOSApp.swift */,
 				058557D7273AAEEB004C7B11 /* Preview Content */,
 			);
 			path = iosApp;

@@ -7,6 +7,8 @@
 //
 
 import SwiftUI
+import shared
+import Combine
 
 extension Color {
     // 공통으로 사용할 색상
@@ -27,4 +29,10 @@ extension Color {
         let b = Double((rgb >>  0) & 0xFF) / 255.0
         self.init(red: r, green: g, blue: b)
     }
+}
+
+// 앱 전체에서 사용할 자료 구조 여기에 추가
+class UserStore: ObservableObject {
+    // 엘리베이터 검사 정보 가져오는 구조체
+    @Published var responseElevator: ResponseElevator?
 }
