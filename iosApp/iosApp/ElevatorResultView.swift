@@ -11,9 +11,40 @@ import shared
 
 struct ElevatorResultView: View {
     @EnvironmentObject var userStore: UserStore
-    @State private var text = "Loading"
+    @State private var text = ""
+    // 다국어 처리
+    private let ResultLoading: LocalizedStringKey = "Loading"
+    private let ResultMain: LocalizedStringKey = "Main"
+    private let ResultError: LocalizedStringKey = "Error"
+    private let address1: LocalizedStringKey = "address1"
+    private let address2: LocalizedStringKey = "address2"
+    private let applcBeDt: LocalizedStringKey = "applcBeDt"
+    private let applcEnDt: LocalizedStringKey = "applcEnDt"
+    private let areaNm: LocalizedStringKey = "areaNm"
+    private let buldMgtNo1: LocalizedStringKey = "buldMgtNo1"
+    private let buldMgtNo2: LocalizedStringKey = "buldMgtNo2"
+    private let buldNm: LocalizedStringKey = "buldNm"
+    private let elevatorNo: LocalizedStringKey = "elevatorNo"
+    private let elvtrAsignNo: LocalizedStringKey = "elvtrAsignNo"
+    private let elvtrDetailForm: LocalizedStringKey = "elvtrDetailForm"
+    private let elvtrDivNm: LocalizedStringKey = "elvtrDivNm"
+    private let elvtrForm: LocalizedStringKey = "elvtrForm"
+    private let elvtrKindNm: LocalizedStringKey = "elvtrKindNm"
+    private let elvtrSttsNm: LocalizedStringKey = "elvtrSttsNm"
+    private let frstInstallationDe: LocalizedStringKey = "frstInstallationDe"
+    private let groundFloorCnt: LocalizedStringKey = "groundFloorCnt"
+    private let installationDe: LocalizedStringKey = "installationDe"
+    private let installationPlace: LocalizedStringKey = "installationPlace"
+    private let liveLoad: LocalizedStringKey = "liveLoad"
+    private let ratedCap: LocalizedStringKey = "ratedCap"
+    private let resultNm: LocalizedStringKey = "resultNm"
+    private let shuttleFloorCnt: LocalizedStringKey = "shuttleFloorCnt"
+    private let shuttleSection: LocalizedStringKey = "shuttleSection"
+    private let sigunguNm: LocalizedStringKey = "sigunguNm"
+    private let undgrndFloorCnt: LocalizedStringKey = "undgrndFloorCnt"
     // 뷰 전환
     @State private var showNextView = false
+    
     var body: some View {
         ZStack {
             Color.back.edgesIgnoringSafeArea(.all)
@@ -23,45 +54,44 @@ struct ElevatorResultView: View {
                     if let itemList = userStore.responseElevator?.response.body.items {
                         ForEach(itemList, id: \.self) { item in
                             Section {
-                                Row(title: "address1", detail: item.address1)
-                                Row(title: "address2", detail: item.address2)
-                                Row(title: "applcBeDt", detail: item.applcBeDt)
-                                Row(title: "applcEnDt", detail: item.applcEnDt)
-                                Row(title: "areaNm", detail: item.areaNm)
-                                Row(title: "buldMgtNo1", detail: item.buldMgtNo1)
-                                Row(title: "buldMgtNo2", detail: item.buldMgtNo2)
-                                Row(title: "buldNm", detail: item.buldNm)
-                                Row(title: "elevatorNo", detail: item.elevatorNo)
-                                Row(title: "elvtrAsignNo", detail: item.elvtrAsignNo)
-                                Row(title: "elvtrDetailForm", detail: item.elvtrDetailForm)
-                                Row(title: "elvtrDivNm", detail: item.elvtrDivNm)
-                                Row(title: "elvtrForm", detail: item.elvtrForm)
-                                Row(title: "elvtrKindNm", detail: item.elvtrKindNm)
-                                Row(title: "elvtrSttsNm", detail: item.elvtrSttsNm)
-                                Row(title: "frstInstallationDe", detail: item.frstInstallationDe)
-                                Row(title: "groundFloorCnt", detail: item.groundFloorCnt)
-                                Row(title: "installationDe", detail: item.installationDe)
-                                Row(title: "installationPlace", detail: item.installationPlace)
-                                Row(title: "liveLoad", detail: item.liveLoad)
-                                Row(title: "ratedCap", detail: item.ratedCap)
-                                Row(title: "resultNm", detail: item.resultNm)
-                                Row(title: "shuttleFloorCnt", detail: item.shuttleFloorCnt)
-                                Row(title: "shuttleSection", detail: item.shuttleSection)
-                                Row(title: "sigunguNm", detail: item.sigunguNm)
-                                Row(title: "undgrndFloorCnt", detail: item.undgrndFloorCnt)
+                                Row(title: address1, detail: item.address1)
+                                Row(title: address2, detail: item.address2)
+                                Row(title: applcBeDt, detail: item.applcBeDt)
+                                Row(title: applcEnDt, detail: item.applcEnDt)
+                                Row(title: areaNm, detail: item.areaNm)
+                                Row(title: buldMgtNo1, detail: item.buldMgtNo1)
+                                Row(title: buldMgtNo2, detail: item.buldMgtNo2)
+                                Row(title: buldNm, detail: item.buldNm)
+                                Row(title: elevatorNo, detail: item.elevatorNo)
+                                Row(title: elvtrAsignNo, detail: item.elvtrAsignNo)
+                                Row(title: elvtrDetailForm, detail: item.elvtrDetailForm)
+                                Row(title: elvtrDivNm, detail: item.elvtrDivNm)
+                                Row(title: elvtrForm, detail: item.elvtrForm)
+                                Row(title: elvtrKindNm, detail: item.elvtrKindNm)
+                                Row(title: elvtrSttsNm, detail: item.elvtrSttsNm)
+                                Row(title: frstInstallationDe, detail: item.frstInstallationDe)
+                                Row(title: groundFloorCnt, detail: item.groundFloorCnt)
+                                Row(title: installationDe, detail: item.installationDe)
+                                Row(title: installationPlace, detail: item.installationPlace)
+                                Row(title: liveLoad, detail: item.liveLoad)
+                                Row(title: ratedCap, detail: item.ratedCap)
+                                Row(title: resultNm, detail: item.resultNm)
+                                Row(title: shuttleFloorCnt, detail: item.shuttleFloorCnt)
+                                Row(title: shuttleSection, detail: item.shuttleSection)
+                                Row(title: sigunguNm, detail: item.sigunguNm)
+                                Row(title: undgrndFloorCnt, detail: item.undgrndFloorCnt)
                             }
                         }
                     }
                 }
                 .listStyle(.insetGrouped)
                 .padding([.horizontal])
-                Text("Main")
+                Text(ResultMain)
                     .font(.largeTitle)
                     .foregroundColor(.white)
                     .frame(maxWidth: .infinity, maxHeight: 90.0)
                     .background(Color.selected)
                     .cornerRadius(16.0)
-                    .padding([.horizontal], 16.0)
                     .onTapGesture {
                         showNextView = true
                     }
@@ -71,9 +101,9 @@ struct ElevatorResultView: View {
         .onAppear(perform: {
             // 화면 나타날 때 자료 가져와서 표시하자.
             if let responseElevator = userStore.responseElevator {
-                text = responseElevator.response.body.items[0].resultNm
+                text = "\(resultNm.stringValue()) :  \(responseElevator.response.body.items[0].resultNm)"
             } else {
-                text = "error"
+                text = "\(resultNm.stringValue()) : \(ResultError)"
             }
         })
         .fullScreenCover(isPresented: $showNextView) {
@@ -83,8 +113,8 @@ struct ElevatorResultView: View {
 }
 
 struct Row: View {
-    var title = "제목"
-    var detail = "내용입니다. 주저리 주저리"
+    var title: LocalizedStringKey
+    var detail: String = ""
     let width = UIScreen.main.bounds.width * 0.3
     var body: some View {
         VStack {
@@ -102,7 +132,6 @@ struct Row: View {
                 .padding([.vertical])
                 .frame(maxWidth: .infinity, alignment: .center)
                 .background(Color.not_selected)
-                .cornerRadius(5.0)
         }
     }
 }
@@ -129,7 +158,8 @@ extension ViewBuilder {
 
 struct ElevatorResultView_Previews: PreviewProvider {
     static var previews: some View {
-        Row()
-        //ElevatorResultView().environmentObject(UserStore())
+        ElevatorResultView()
+            .environmentObject(UserStore())
+            .environment(\.locale, .init(identifier: "ko"))
     }
 }
