@@ -31,6 +31,12 @@ extension Color {
     }
 }
 
+extension LocalizedStringKey {
+    var stringKey: String? {
+        Mirror(reflecting: self).children.first(where: { $0.label == "key" })?.value as? String
+    }
+}
+
 // 앱 전체에서 사용할 자료 구조 여기에 추가
 class UserStore: ObservableObject {
     // 엘리베이터 검사 정보 가져오는 구조체

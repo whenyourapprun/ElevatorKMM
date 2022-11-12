@@ -91,7 +91,6 @@ struct MainView: View {
             }
             .background(Color.back.ignoresSafeArea(.all))
             .statusBarHidden(true)
-            .navigationBarHidden(true)
         }
     }
 }
@@ -145,7 +144,6 @@ struct CardView: View {
             }
         }
         .statusBarHidden(true)
-        .navigationBarHidden(true)
         .fullScreenCover(isPresented: $showNextView) {
             if nextIndex == 0 {
                 ElevatorView()

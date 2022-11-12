@@ -11,3 +11,9 @@
 "MyPageGuide" = "설정 및 이력을 확인할 수 있어요.";
 "NickChange" = "별명 수정";
 "NickChangeGuide" = "앱에서 사용하는 별명을 수정할 수 있어요.";
+"ElevatorInputGuide" = "엘리베이터 번호를 입력하여 정보를 확인하세요.";
+"ElevatorInputPlace" = "엘리베이터 번호 입력";
+"OK" = "확인";
+"ReceivedData" = "수신된 데이터";
+"ReceivedDetail" = "데이터 수신이 완료되었습니다.";
+"Loading" = "수신중";
