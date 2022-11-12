@@ -12,7 +12,7 @@
 "NickChange" = "별명 수정";
 "NickChangeGuide" = "앱에서 사용하는 별명을 수정할 수 있어요.";
 "ElevatorInputGuide" = "엘리베이터 번호를 입력하여 정보를 확인하세요.";
-"ElevatorInputPlace" = "엘리베이터 번호 입력";
+"ElevatorInputWait" = "엘리베이터 번호에 대한 결과를 기다리고 있어요.";
 "OK" = "확인";
 "ReceivedData" = "수신된 데이터";
 "ReceivedDetail" = "데이터 수신이 완료되었습니다.";

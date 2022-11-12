@@ -11,11 +11,13 @@ import shared
 
 struct ElevatorView: View {
     @EnvironmentObject var userStore: UserStore
-    @State var elevatorNo: String = "8088381"
+    @State var elevatorNo: String = ""//"8088381"
+    @State private var checkButton = false
+    @State private var isLoading = false
     @State private var showAlert = false
     // 다국어 처리
     private let ElevatorInputGuide: LocalizedStringKey = "ElevatorInputGuide"
-    private let ElevatorInputPlace: LocalizedStringKey = "ElebatorInputPlace"
+    private let ElevatorInputWait: LocalizedStringKey = "ElevatorInputWait"
     private let ElavatorOK: LocalizedStringKey = "OK"
     private let ElevatorReceivedData: LocalizedStringKey = "ReceivedData"
     private let ElevatorReceivedDetail: LocalizedStringKey = "ReceivedDetail"
@@ -28,41 +30,67 @@ struct ElevatorView: View {
             Color.back.edgesIgnoringSafeArea(.all)
             HStack(spacing: 16.0) {
                 VStack(spacing: 16.0) {
-                    Text(ElevatorInputGuide)
+                    // 상태 안내창 문구
+                    Text(checkButton ? ElevatorInputGuide : ElevatorInputWait)
                         .padding()
                         .font(.body)
                         .foregroundColor(.not_selected)
                         .multilineTextAlignment(.center)
                         .minimumScaleFactor(0.5)
                         .lineLimit(1)
-                    TextField(ElevatorInputPlace, text: $elevatorNo)
+                    // 엘리베이터 번호 입력
+                    TextField("8088-381", text: $elevatorNo)
+                        .onChange(of: elevatorNo, perform: { newValue in
+                            // 4자리 입력하면 자동으로 - 추가
+                            if elevatorNo.count == 0 {
+                                checkButton = false
+                            } else if elevatorNo.count == 1 {
+                                checkButton = true
+                            } else if elevatorNo.count == 4 {
+                                elevatorNo += "-"
+                            } else if elevatorNo.count > 8 {
+                                // 자리수에 넘게 입력하면 초기화
+                                elevatorNo = ""
+                            }
+                        })
                         .keyboardType(.decimalPad)
                         .font(.largeTitle)
                         .foregroundColor(Color.text)
                         .multilineTextAlignment(.center)
                         .minimumScaleFactor(0.5)
                         .lineLimit(1)
+                    // 하단의 확인버튼
                     Button(action: {
-                        // 입력된 번호로 엘리베이터 점검 결과를 가져온다.
-                        Elevator().getElevatorInfo(elevatorNo: elevatorNo, completionHandler: { response, error in
-                            DispatchQueue.main.async {
-                                // Alert 로 결과를 띄워준다.
-                                showAlert = true
-                                if let elevatorInfo = response {
-                                    userStore.responseElevator = elevatorInfo
+                        if checkButton == true {
+                            // 터치하면 버튼 비활성
+                            checkButton = false
+                            // 로딩 상태 표시
+                            isLoading = true
+                            // 입력된 번호(- 빼고 전달)로 엘리베이터 점검 결과를 가져온다.
+                            let sendElevatorNo = elevatorNo.replacingOccurrences(of: "-", with: "")
+                            print("sendElevatorNo \(sendElevatorNo)")
+                            Elevator().getElevatorInfo(elevatorNo: sendElevatorNo, completionHandler: { response, error in
+                                DispatchQueue.main.async {
+                                    // 로딩 창을 감추자
+                                    isLoading = false
+                                    if let elevatorInfo = response {
+                                        userStore.responseElevator = elevatorInfo
+                                    }
                                 }
-                            }
-                        })
+                            })
+                        }
+                        // 키보드 감추기
                         hideKeyboard()
                     }, label: {
                         Text(ElavatorOK)
                             .padding()
                             .frame(maxWidth: .infinity)
-                            .background(Color.selected)
+                            .background(checkButton ? Color.selected : Color.not_selected)
                             .cornerRadius(8.0)
                             .font(.largeTitle)
-                            .foregroundColor(.white)
+                            .foregroundColor(checkButton ? .white : .text)
                     })
+                    .disabled(checkButton == false)
                 }
                 .padding(16.0)
                 .background(Color.white)
@@ -72,11 +100,33 @@ struct ElevatorView: View {
                     Alert(
                         title: Text(ElevatorReceivedData),
                         message: Text(ElevatorReceivedDetail),
-                        dismissButton: .default(Text(ElavatorOK), action: { showNextView = true })
+                        dismissButton:
+                                .default(Text(ElavatorOK),
+                                                action: {
+                                                    showNextView = true
+                                                }
+                                        )
                     )
                 }
             }
             .padding(16.0)
+            .sheet(isPresented: $isLoading, content: {
+                // 로딩 창을 띄운다
+                ProgressView {
+                    Text(ElevatorLoading)
+                        .font(.largeTitle)
+                        .fontWeight(.bold)
+                }
+                .progressViewStyle(CircularProgressViewStyle(tint: .text))
+                .frame(maxWidth: .infinity, maxHeight: 200, alignment: .center)
+                .background(Color.white)
+                .cornerRadius(16.0)
+                .padding()
+                .onDisappear {
+                    // Alert 로 결과를 띄워준다.
+                    showAlert = true
+                }
+            })
         }
         .statusBarHidden(true)
         .fullScreenCover(isPresented: $showNextView) {
@@ -85,13 +135,11 @@ struct ElevatorView: View {
     }
 }
 
-#if canImport(UIKit)
-extension View {
+extension ElevatorView {
     func hideKeyboard() {
         UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
     }
 }
-#endif
 
 struct Elevator_Previews: PreviewProvider {
     static var previews: some View {

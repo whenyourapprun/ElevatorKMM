@@ -12,7 +12,7 @@
 "NickChange" = "Nick Change";
 "NickChangeGuide" = "You can edit the nickname used by the app.";
 "ElevatorInputGuide" = "Enter the elevator number to check the information.";
-"ElevatorInputPlace" = "Input Elevator number";
+"ElevatorInputWait" = "Waiting for the results for the elevator number.";
 "OK" = "OK";
 "ReceivedData" = "Received Data";
 "ReceivedDetail" = "Data reception is complete.";
