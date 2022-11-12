@@ -50,35 +50,44 @@ struct ElevatorResultView: View {
             Color.back.edgesIgnoringSafeArea(.all)
             VStack {
                 Text(text)
+                    .font(.title)
+                    .minimumScaleFactor(0.5)
+                    .lineLimit(1)
+                    .foregroundColor(.text)
+                    .padding([.vertical])
+                    .frame(maxWidth: .infinity, alignment: .center)
+                    .background(Color.white)
+                    .cornerRadius(16.0)
+                    .padding([.horizontal])
                 List {
                     if let itemList = userStore.responseElevator?.response.body.items {
                         ForEach(itemList, id: \.self) { item in
                             Section {
-                                Row(title: address1, detail: item.address1)
-                                Row(title: address2, detail: item.address2)
-                                Row(title: applcBeDt, detail: item.applcBeDt)
-                                Row(title: applcEnDt, detail: item.applcEnDt)
-                                Row(title: areaNm, detail: item.areaNm)
-                                Row(title: buldMgtNo1, detail: item.buldMgtNo1)
-                                Row(title: buldMgtNo2, detail: item.buldMgtNo2)
-                                Row(title: buldNm, detail: item.buldNm)
                                 Row(title: elevatorNo, detail: item.elevatorNo)
                                 Row(title: elvtrAsignNo, detail: item.elvtrAsignNo)
-                                Row(title: elvtrDetailForm, detail: item.elvtrDetailForm)
+                                Row(title: areaNm, detail: item.areaNm)
+                                Row(title: sigunguNm, detail: item.sigunguNm)
+                                Row(title: address1, detail: item.address1)
+                                Row(title: address2, detail: item.address2)
+                                Row(title: buldNm, detail: item.buldNm)
+                                Row(title: buldMgtNo1, detail: item.buldMgtNo1)
+                                Row(title: buldMgtNo2, detail: item.buldMgtNo2)
+                                Row(title: resultNm, detail: item.resultNm)
+                                Row(title: applcBeDt, detail: item.applcBeDt)
+                                Row(title: applcEnDt, detail: item.applcEnDt)
                                 Row(title: elvtrDivNm, detail: item.elvtrDivNm)
                                 Row(title: elvtrForm, detail: item.elvtrForm)
                                 Row(title: elvtrKindNm, detail: item.elvtrKindNm)
+                                Row(title: elvtrDetailForm, detail: item.elvtrDetailForm)
                                 Row(title: elvtrSttsNm, detail: item.elvtrSttsNm)
                                 Row(title: frstInstallationDe, detail: item.frstInstallationDe)
-                                Row(title: groundFloorCnt, detail: item.groundFloorCnt)
                                 Row(title: installationDe, detail: item.installationDe)
                                 Row(title: installationPlace, detail: item.installationPlace)
                                 Row(title: liveLoad, detail: item.liveLoad)
                                 Row(title: ratedCap, detail: item.ratedCap)
-                                Row(title: resultNm, detail: item.resultNm)
                                 Row(title: shuttleFloorCnt, detail: item.shuttleFloorCnt)
                                 Row(title: shuttleSection, detail: item.shuttleSection)
-                                Row(title: sigunguNm, detail: item.sigunguNm)
+                                Row(title: groundFloorCnt, detail: item.groundFloorCnt)
                                 Row(title: undgrndFloorCnt, detail: item.undgrndFloorCnt)
                             }
                         }
@@ -92,6 +101,7 @@ struct ElevatorResultView: View {
                     .frame(maxWidth: .infinity, maxHeight: 90.0)
                     .background(Color.selected)
                     .cornerRadius(16.0)
+                    .padding([.horizontal])
                     .onTapGesture {
                         showNextView = true
                     }
@@ -103,7 +113,7 @@ struct ElevatorResultView: View {
             if let responseElevator = userStore.responseElevator {
                 text = "\(resultNm.stringValue()) :  \(responseElevator.response.body.items[0].resultNm)"
             } else {
-                text = "\(resultNm.stringValue()) : \(ResultError)"
+                text = "\(resultNm.stringValue()) : \(ResultError.stringValue())"
             }
         })
         .fullScreenCover(isPresented: $showNextView) {
