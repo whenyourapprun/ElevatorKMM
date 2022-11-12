@@ -26,6 +26,8 @@ struct MainView: View {
     private let MyPageGuide: LocalizedStringKey = "MyPageGuide"
     private let NickChange: LocalizedStringKey = "NickChange"
     private let NickChangeGuide: LocalizedStringKey = "NickChangeGuide"
+    // 뷰 전환
+    @State private var showBottomNextView = false
     
     var body: some View {
         NavigationView {
@@ -50,7 +52,11 @@ struct MainView: View {
                             select_3 = false
                             DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(100)) {
                                 isAni_1 = false
+                                showBottomNextView = true
                             }
+                        }
+                        .fullScreenCover(isPresented: $showBottomNextView) {
+                            ElevatorView()
                         }
                     Text("2")
                         .font(.title)
@@ -67,7 +73,11 @@ struct MainView: View {
                             select_3 = false
                             DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(100)) {
                                 isAni_2 = false
+                                showBottomNextView = true
                             }
+                        }
+                        .fullScreenCover(isPresented: $showBottomNextView) {
+                            MyPageView()
                         }
                     Text("3")
                         .font(.title)
@@ -84,7 +94,11 @@ struct MainView: View {
                             select_3 = true
                             DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(100)) {
                                 isAni_3 = false
+                                showBottomNextView = true
                             }
+                        }
+                        .fullScreenCover(isPresented: $showBottomNextView) {
+                            NickView()
                         }
                 }
                 .padding([.horizontal], 16.0)
@@ -105,7 +119,7 @@ struct CardView: View {
     @State private var isAnimated = false
     var ani: Animation { Animation.linear(duration: 0.2) }
     // 뷰 전환
-    @State private var showNextView = false
+    @State private var showCardNextView = false
     
     var body: some View {
         ZStack {
@@ -137,16 +151,20 @@ struct CardView: View {
                 isAnimated = true
                 DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(100)) {
                     isAnimated = false
-                    if nextIndex == 0 {
-                        showNextView = true
+                    if nextIndex == 0 || nextIndex == 1 || nextIndex == 2 {
+                        showCardNextView = true
                     }
                 }
             }
         }
         .statusBarHidden(true)
-        .fullScreenCover(isPresented: $showNextView) {
+        .fullScreenCover(isPresented: $showCardNextView) {
             if nextIndex == 0 {
                 ElevatorView()
+            } else if nextIndex == 1 {
+                MyPageView()
+            } else if nextIndex == 2 {
+                NickView()
             }
         }
     }
