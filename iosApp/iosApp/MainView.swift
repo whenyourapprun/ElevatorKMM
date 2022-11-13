@@ -8,6 +8,7 @@
 
 import SwiftUI
 import shared
+import GoogleMobileAds
 
 struct MainView: View {
     // 하단 버튼 애니메이션과 선택 표시를 위한 저장가능한 변수

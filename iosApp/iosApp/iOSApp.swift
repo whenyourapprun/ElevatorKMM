@@ -1,11 +1,10 @@
 import SwiftUI
 import GoogleMobileAds
 import AppTrackingTransparency
+import UIKit
 
-@main
-struct iOSApp: App {
-    
-    init() {
+class AppDelegate: NSObject, UIApplicationDelegate {
+    func application(_ application: UIApplication,didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
         // 데이터베이스 생성은 한번만 해야 함.
         let uuid = UserDefaults.standard.string(forKey: "uuid")
         if uuid == nil {
@@ -15,15 +14,19 @@ struct iOSApp: App {
             print("createTable")
             db.createTable()
         }
-        // 구글 adMob 광고 모듈
         GADMobileAds.sharedInstance().start(completionHandler: nil)
-        GADMobileAds.sharedInstance().requestConfiguration.testDeviceIdentifiers = [ GADSimulatorID ]
+        GADMobileAds.sharedInstance().requestConfiguration.testDeviceIdentifiers = [ GADSimulatorID, "1fbe08c670316f9a1fc08317899a857d" ]
         // DispatchQueue 이용
         DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
           ATTrackingManager.requestTrackingAuthorization(completionHandler: { _ in })
         }
+        return true
     }
-    
+}
+
+@main
+struct iOSApp: App {
+    @UIApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
 	var body: some Scene {
 		WindowGroup {
             // 앱 전체에서 사용할 수 있도록 여기에 추가

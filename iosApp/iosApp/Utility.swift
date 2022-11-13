@@ -12,6 +12,8 @@ import Combine
 
 let bannerId = "ca-app-pub-4377563560880478/2336045802"
 let fullId = "ca-app-pub-4377563560880478/6393683610"
+let rewardFullId = "ca-app-pub-4377563560880478/6049448817"
+let rewardId = "ca-app-pub-4377563560880478/6410758501"
 let openId = "ca-app-pub-4377563560880478/3767520279"
 
 extension Color {
