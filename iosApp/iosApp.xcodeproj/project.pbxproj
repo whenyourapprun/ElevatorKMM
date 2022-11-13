@@ -16,6 +16,7 @@
 		7E58B7B7292079B200BD62F0 /* DBHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E58B7B6292079B200BD62F0 /* DBHelper.swift */; };
 		7E58B7B929207C3E00BD62F0 /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E58B7B829207C3E00BD62F0 /* Model.swift */; };
 		7E58B7BC2920995F00BD62F0 /* GoogleMobileAds in Frameworks */ = {isa = PBXBuildFile; productRef = 7E58B7BB2920995F00BD62F0 /* GoogleMobileAds */; };
+		7E58B7C82920BBE300BD62F0 /* BannerAd.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E58B7C72920BBE300BD62F0 /* BannerAd.swift */; };
 		7E620D25291B4D8600B9B944 /* ElevatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E620D24291B4D8600B9B944 /* ElevatorView.swift */; };
 		7E620D27291B8C7400B9B944 /* Utility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E620D26291B8C7400B9B944 /* Utility.swift */; };
 		7E620D2A291CD49E00B9B944 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 7E620D2C291CD49E00B9B944 /* Localizable.strings */; };
@@ -48,6 +49,7 @@
 		7E58B7B4291FDCEE00BD62F0 /* NickView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NickView.swift; sourceTree = "<group>"; };
 		7E58B7B6292079B200BD62F0 /* DBHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DBHelper.swift; sourceTree = "<group>"; };
 		7E58B7B829207C3E00BD62F0 /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
+		7E58B7C72920BBE300BD62F0 /* BannerAd.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BannerAd.swift; sourceTree = "<group>"; };
 		7E620D24291B4D8600B9B944 /* ElevatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ElevatorView.swift; sourceTree = "<group>"; };
 		7E620D26291B8C7400B9B944 /* Utility.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utility.swift; sourceTree = "<group>"; };
 		7E620D2B291CD49E00B9B944 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -109,6 +111,7 @@
 				7E58B7B6292079B200BD62F0 /* DBHelper.swift */,
 				7E58B7B829207C3E00BD62F0 /* Model.swift */,
 				7E620D26291B8C7400B9B944 /* Utility.swift */,
+				7E58B7C72920BBE300BD62F0 /* BannerAd.swift */,
 				7E620D32291CDE0B00B9B944 /* InfoPlist.strings */,
 				7E620D2C291CD49E00B9B944 /* Localizable.strings */,
 				7555FF8C242A565B00829871 /* Info.plist */,
@@ -231,6 +234,7 @@
 				7E620D37291DD6EF00B9B944 /* ElevatorResultView.swift in Sources */,
 				7E58B7B7292079B200BD62F0 /* DBHelper.swift in Sources */,
 				7E58B7B929207C3E00BD62F0 /* Model.swift in Sources */,
+				7E58B7C82920BBE300BD62F0 /* BannerAd.swift in Sources */,
 				7E620D27291B8C7400B9B944 /* Utility.swift in Sources */,
 				7E8CFD8F28F67FFE00599355 /* MainView.swift in Sources */,
 				7555FF83242A565900829871 /* IntroView.swift in Sources */,

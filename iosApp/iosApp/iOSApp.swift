@@ -17,6 +17,7 @@ struct iOSApp: App {
         }
         // 구글 adMob 광고 모듈
         GADMobileAds.sharedInstance().start(completionHandler: nil)
+        GADMobileAds.sharedInstance().requestConfiguration.testDeviceIdentifiers = [ GADSimulatorID ]
         // DispatchQueue 이용
         DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
           ATTrackingManager.requestTrackingAuthorization(completionHandler: { _ in })

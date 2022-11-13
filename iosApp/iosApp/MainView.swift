@@ -32,10 +32,15 @@ struct MainView: View {
     var body: some View {
         NavigationView {
             VStack {
+                // 배너 광고
+                BannerAd(unitID: bannerId)
+                // 내용 제목
                 CardView(title: Elevator, guide: ElevatorGuide, nextIndex: 0)
                 CardView(title: MyPage, guide: MyPageGuide, nextIndex: 1)
                 CardView(title: NickChange, guide: NickChangeGuide, nextIndex: 2)
+                // 공간
                 Spacer()
+                // 하단 메뉴
                 HStack {
                     Text("⇧")
                         .font(.largeTitle)
