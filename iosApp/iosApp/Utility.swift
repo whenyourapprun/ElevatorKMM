@@ -10,6 +10,10 @@ import SwiftUI
 import shared
 import Combine
 
+let bannerId = "ca-app-pub-4377563560880478/2336045802"
+let fullId = "ca-app-pub-4377563560880478/6393683610"
+let openId = "ca-app-pub-4377563560880478/3767520279"
+
 extension Color {
     // 공통으로 사용할 색상
     static let back = Color(hex: "#F3F4F5")

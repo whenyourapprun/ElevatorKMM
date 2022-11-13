@@ -1,4 +1,6 @@
 import SwiftUI
+import GoogleMobileAds
+import AppTrackingTransparency
 
 @main
 struct iOSApp: App {
@@ -13,12 +15,25 @@ struct iOSApp: App {
             print("createTable")
             db.createTable()
         }
+        // 구글 adMob 광고 모듈
+        GADMobileAds.sharedInstance().start(completionHandler: nil)
+        // DispatchQueue 이용
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+          ATTrackingManager.requestTrackingAuthorization(completionHandler: { _ in })
+        }
     }
     
 	var body: some Scene {
 		WindowGroup {
             // 앱 전체에서 사용할 수 있도록 여기에 추가
-            IntroView().environmentObject(UserStore())
+            IntroView()
+                .environmentObject(UserStore())
+                .onReceive(
+                    NotificationCenter.default.publisher(for: UIApplication.didBecomeActiveNotification)
+                ) { _ in
+                    ATTrackingManager.requestTrackingAuthorization(completionHandler: { _ in })
+                }
+            
 		}
 	}
 }

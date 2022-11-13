@@ -2,10 +2,14 @@ import SwiftUI
 import shared
 
 struct IntroView: View {
+    // 타이머
     @State private var count: Double = 0.0
     let timer = Timer.publish(every: 0.1, on: .main, in: .common).autoconnect()
+    // 다음 화면 이동
     @State private var showMainScreen = false
+    // 다국어 처리
     private let elevator: LocalizedStringKey = "Elevator"
+    
 	var body: some View {
         ZStack {
             Color.back.edgesIgnoringSafeArea(.all)
