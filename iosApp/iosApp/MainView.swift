@@ -37,8 +37,8 @@ struct MainView: View {
                 CardView(title: NickChange, guide: NickChangeGuide, nextIndex: 2)
                 Spacer()
                 HStack {
-                    Text("1")
-                        .font(.title)
+                    Text("⇧")
+                        .font(.largeTitle)
                         .foregroundColor(select_1 ? .white : .text)
                         .frame(maxWidth: .infinity, maxHeight: 70.0)
                         .background(select_1 ? Color.selected : Color.not_selected)
@@ -58,8 +58,8 @@ struct MainView: View {
                         .fullScreenCover(isPresented: $showBottomNextView) {
                             ElevatorView()
                         }
-                    Text("2")
-                        .font(.title)
+                    Text("⚙︎")
+                        .font(.largeTitle)
                         .foregroundColor(select_2 ? .white : .text)
                         .frame(maxWidth: .infinity, maxHeight: 70.0)
                         .background(select_2 ? Color.selected : Color.not_selected)
@@ -79,8 +79,8 @@ struct MainView: View {
                         .fullScreenCover(isPresented: $showBottomNextView) {
                             MyPageView()
                         }
-                    Text("3")
-                        .font(.title)
+                    Text("♺")
+                        .font(.largeTitle)
                         .foregroundColor(select_3 ? .white : .text)
                         .frame(maxWidth: .infinity, maxHeight: 70.0)
                         .background(select_3 ? Color.selected : Color.not_selected)
@@ -132,10 +132,14 @@ struct CardView: View {
                             .font(.largeTitle)
                             .fontWeight(.bold)
                             .foregroundColor(.text)
+                            .minimumScaleFactor(0.5)
+                            .lineLimit(1)
                             .padding()
                         Text(guide)
                             .font(.body)
                             .foregroundColor(.selected)
+                            .minimumScaleFactor(0.5)
+                            .lineLimit(1)
                             .padding()
                     }
                     Spacer()

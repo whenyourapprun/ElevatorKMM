@@ -45,7 +45,7 @@ struct MyPageView: View {
                             showNickView = true
                         } label: {
                             Text(MyPageNickChange)
-                                .font(.title)
+                                .font(.body)
                                 .minimumScaleFactor(0.5)
                                 .lineLimit(1)
                                 .foregroundColor(.white)

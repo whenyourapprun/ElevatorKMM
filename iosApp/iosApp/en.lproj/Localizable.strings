@@ -12,6 +12,7 @@
 "NickChange" = "Nick Change";
 "NickSample" = "Nemesis";
 "NickChangeGuide" = "You can edit the nickname used by the app.";
+"NickInput" = "Nick Input";
 "ElevatorInputGuide" = "Enter the elevator number to check the information.";
 "ElevatorInputWait" = "Waiting for the results for the elevator number.";
 "OK" = "OK";
