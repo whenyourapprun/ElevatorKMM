@@ -104,6 +104,16 @@ struct ElevatorResultView: View {
                     .padding([.horizontal])
                     .onTapGesture {
                         showNextView = true
+                        // 내부 디비에 검색 결과를 저장하자.
+                        if let responseElevator = userStore.responseElevator {
+                            let number = responseElevator.response.body.items[0].elevatorNo
+                            let build = responseElevator.response.body.items[0].buldNm
+                            let df = DateFormatter()
+                            df.dateFormat = "yyyy.MM.dd HH:mm:ss"
+                            let date = df.string(from: Date())
+                            print("number \(number), build \(build), date \(date)")
+                            DBHelper().insertData(number: number, build: build, date: date)
+                        }
                     }
             }
         }

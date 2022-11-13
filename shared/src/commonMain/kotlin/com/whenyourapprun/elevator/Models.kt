@@ -1,5 +1,6 @@
 package com.whenyourapprun.elevator
 
+import io.ktor.client.network.sockets.*
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 

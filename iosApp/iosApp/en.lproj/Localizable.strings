@@ -10,6 +10,7 @@
 "MyPage" = "My Page";
 "MyPageGuide" = "You can check settings and history.";
 "NickChange" = "Nick Change";
+"NickSample" = "Nemesis";
 "NickChangeGuide" = "You can edit the nickname used by the app.";
 "ElevatorInputGuide" = "Enter the elevator number to check the information.";
 "ElevatorInputWait" = "Waiting for the results for the elevator number.";
