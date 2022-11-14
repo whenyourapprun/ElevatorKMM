@@ -16,14 +16,13 @@
 		7E58B7B7292079B200BD62F0 /* DBHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E58B7B6292079B200BD62F0 /* DBHelper.swift */; };
 		7E58B7B929207C3E00BD62F0 /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E58B7B829207C3E00BD62F0 /* Model.swift */; };
 		7E58B7BC2920995F00BD62F0 /* GoogleMobileAds in Frameworks */ = {isa = PBXBuildFile; productRef = 7E58B7BB2920995F00BD62F0 /* GoogleMobileAds */; };
-		7E58B7C82920BBE300BD62F0 /* BannerAd.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E58B7C72920BBE300BD62F0 /* BannerAd.swift */; };
 		7E620D25291B4D8600B9B944 /* ElevatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E620D24291B4D8600B9B944 /* ElevatorView.swift */; };
 		7E620D27291B8C7400B9B944 /* Utility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E620D26291B8C7400B9B944 /* Utility.swift */; };
 		7E620D2A291CD49E00B9B944 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 7E620D2C291CD49E00B9B944 /* Localizable.strings */; };
 		7E620D30291CDE0B00B9B944 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 7E620D32291CDE0B00B9B944 /* InfoPlist.strings */; };
 		7E620D37291DD6EF00B9B944 /* ElevatorResultView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E620D36291DD6EF00B9B944 /* ElevatorResultView.swift */; };
 		7E8CFD8F28F67FFE00599355 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E8CFD8E28F67FFE00599355 /* MainView.swift */; };
-		7EB7905B29212D51003217CF /* RewardAd.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EB7905A29212D51003217CF /* RewardAd.swift */; };
+		7E9296262921C008003C63D6 /* BannerAdView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E9296252921C008003C63D6 /* BannerAdView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -43,14 +42,13 @@
 		058557BA273AAA24004C7B11 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		058557D8273AAEEB004C7B11 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		2152FB032600AC8F00CF470E /* iOSApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iOSApp.swift; sourceTree = "<group>"; };
-		7555FF7B242A565900829871 /* iosApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iosApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		7555FF7B242A565900829871 /* Elevator.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Elevator.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7555FF82242A565900829871 /* IntroView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntroView.swift; sourceTree = "<group>"; };
 		7555FF8C242A565B00829871 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		7E58B7B2291FDCB900BD62F0 /* MyPageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageView.swift; sourceTree = "<group>"; };
 		7E58B7B4291FDCEE00BD62F0 /* NickView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NickView.swift; sourceTree = "<group>"; };
 		7E58B7B6292079B200BD62F0 /* DBHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DBHelper.swift; sourceTree = "<group>"; };
 		7E58B7B829207C3E00BD62F0 /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
-		7E58B7C72920BBE300BD62F0 /* BannerAd.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BannerAd.swift; sourceTree = "<group>"; };
 		7E620D24291B4D8600B9B944 /* ElevatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ElevatorView.swift; sourceTree = "<group>"; };
 		7E620D26291B8C7400B9B944 /* Utility.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utility.swift; sourceTree = "<group>"; };
 		7E620D2B291CD49E00B9B944 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -59,7 +57,7 @@
 		7E620D33291CDE0F00B9B944 /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		7E620D36291DD6EF00B9B944 /* ElevatorResultView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ElevatorResultView.swift; sourceTree = "<group>"; };
 		7E8CFD8E28F67FFE00599355 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
-		7EB7905A29212D51003217CF /* RewardAd.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RewardAd.swift; sourceTree = "<group>"; };
+		7E9296252921C008003C63D6 /* BannerAdView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BannerAdView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -94,7 +92,7 @@
 		7555FF7C242A565900829871 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				7555FF7B242A565900829871 /* iosApp.app */,
+				7555FF7B242A565900829871 /* Elevator.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -113,8 +111,7 @@
 				7E58B7B6292079B200BD62F0 /* DBHelper.swift */,
 				7E58B7B829207C3E00BD62F0 /* Model.swift */,
 				7E620D26291B8C7400B9B944 /* Utility.swift */,
-				7E58B7C72920BBE300BD62F0 /* BannerAd.swift */,
-				7EB7905A29212D51003217CF /* RewardAd.swift */,
+				7E9296252921C008003C63D6 /* BannerAdView.swift */,
 				7E620D32291CDE0B00B9B944 /* InfoPlist.strings */,
 				7E620D2C291CD49E00B9B944 /* Localizable.strings */,
 				7555FF8C242A565B00829871 /* Info.plist */,
@@ -133,9 +130,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		7555FF7A242A565900829871 /* iosApp */ = {
+		7555FF7A242A565900829871 /* Elevator */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 7555FFA5242A565B00829871 /* Build configuration list for PBXNativeTarget "iosApp" */;
+			buildConfigurationList = 7555FFA5242A565B00829871 /* Build configuration list for PBXNativeTarget "Elevator" */;
 			buildPhases = (
 				7555FFB5242A651A00829871 /* ShellScript */,
 				7555FF77242A565900829871 /* Sources */,
@@ -147,12 +144,12 @@
 			);
 			dependencies = (
 			);
-			name = iosApp;
+			name = Elevator;
 			packageProductDependencies = (
 				7E58B7BB2920995F00BD62F0 /* GoogleMobileAds */,
 			);
 			productName = iosApp;
-			productReference = 7555FF7B242A565900829871 /* iosApp.app */;
+			productReference = 7555FF7B242A565900829871 /* Elevator.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -187,7 +184,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				7555FF7A242A565900829871 /* iosApp */,
+				7555FF7A242A565900829871 /* Elevator */,
 			);
 		};
 /* End PBXProject section */
@@ -234,12 +231,11 @@
 				7E58B7B3291FDCB900BD62F0 /* MyPageView.swift in Sources */,
 				7E58B7B5291FDCEE00BD62F0 /* NickView.swift in Sources */,
 				2152FB042600AC8F00CF470E /* iOSApp.swift in Sources */,
-				7EB7905B29212D51003217CF /* RewardAd.swift in Sources */,
 				7E620D37291DD6EF00B9B944 /* ElevatorResultView.swift in Sources */,
 				7E58B7B7292079B200BD62F0 /* DBHelper.swift in Sources */,
 				7E58B7B929207C3E00BD62F0 /* Model.swift in Sources */,
-				7E58B7C82920BBE300BD62F0 /* BannerAd.swift in Sources */,
 				7E620D27291B8C7400B9B944 /* Utility.swift in Sources */,
+				7E9296262921C008003C63D6 /* BannerAdView.swift in Sources */,
 				7E8CFD8F28F67FFE00599355 /* MainView.swift in Sources */,
 				7555FF83242A565900829871 /* IntroView.swift in Sources */,
 				7E620D25291B4D8600B9B944 /* ElevatorView.swift in Sources */,
@@ -394,7 +390,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 5;
 				DEVELOPMENT_ASSET_PATHS = "\"iosApp/Preview Content\"";
 				DEVELOPMENT_TEAM = 46C49ZR24X;
 				ENABLE_PREVIEWS = YES;
@@ -426,7 +422,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 5;
 				DEVELOPMENT_ASSET_PATHS = "\"iosApp/Preview Content\"";
 				DEVELOPMENT_TEAM = 46C49ZR24X;
 				ENABLE_PREVIEWS = YES;
@@ -464,7 +460,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		7555FFA5242A565B00829871 /* Build configuration list for PBXNativeTarget "iosApp" */ = {
+		7555FFA5242A565B00829871 /* Build configuration list for PBXNativeTarget "Elevator" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				7555FFA6242A565B00829871 /* Debug */,

@@ -12,8 +12,6 @@ import shared
 struct ElevatorResultView: View {
     @EnvironmentObject var userStore: UserStore
     @State private var text = ""
-    // 보상형 전면광고
-    @ObservedObject var reward = RewardAd()
     // 다국어 처리
     private let ResultLoading: LocalizedStringKey = "Loading"
     private let ResultMain: LocalizedStringKey = "Main"
@@ -105,8 +103,6 @@ struct ElevatorResultView: View {
                     .cornerRadius(16.0)
                     .padding([.horizontal])
                     .onTapGesture {
-                        // 보상형 광고 보여주기
-                        reward.ShowReward()
                         showNextView = true
                         // 내부 디비에 검색 결과를 저장하자.
                         if let responseElevator = userStore.responseElevator {
@@ -129,8 +125,6 @@ struct ElevatorResultView: View {
             } else {
                 text = "\(resultNm.stringValue()) : \(ResultError.stringValue())"
             }
-            // 보상형 광고 로딩
-            reward.LoadReward()
         })
         .fullScreenCover(isPresented: $showNextView) {
             MainView()

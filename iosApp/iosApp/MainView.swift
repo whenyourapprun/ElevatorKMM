@@ -34,7 +34,8 @@ struct MainView: View {
         NavigationView {
             VStack {
                 // 배너 광고
-                BannerAd(unitID: bannerId)
+                BannerAdView()
+                        .frame(width: UIScreen.main.bounds.width, height: GADPortraitAnchoredAdaptiveBannerAdSizeWithWidth(UIScreen.main.bounds.width).size.height)
                 // 내용 제목
                 CardView(title: Elevator, guide: ElevatorGuide, nextIndex: 0)
                 CardView(title: MyPage, guide: MyPageGuide, nextIndex: 1)
