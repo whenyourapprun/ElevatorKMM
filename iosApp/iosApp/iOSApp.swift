@@ -4,11 +4,15 @@ import AppTrackingTransparency
 
 @main
 struct iOSApp: App {
+    @ObservedObject var appOpen = AppOpen()
 	var body: some Scene {
 		WindowGroup {
             // 앱 전체에서 사용할 수 있도록 여기에 추가
             IntroView()
                 .environmentObject(UserStore())
+                .onChange(of: appOpen.appOpenAdLoaded) { _ in
+                    appOpen.ShowAppOpenAd()
+                }
                 .onReceive(
                     NotificationCenter.default.publisher(for: UIApplication.didBecomeActiveNotification)) { _ in
                     ATTrackingManager.requestTrackingAuthorization(completionHandler: { _ in })

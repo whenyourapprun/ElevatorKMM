@@ -26,6 +26,7 @@
 		7EF43FF6292314E70085BC56 /* FullScreenModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EF43FF5292314E70085BC56 /* FullScreenModifier.swift */; };
 		7EF43FF8292315BB0085BC56 /* InterstitialAd.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EF43FF7292315BB0085BC56 /* InterstitialAd.swift */; };
 		7EF43FFA292316240085BC56 /* RewardedAd.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EF43FF9292316240085BC56 /* RewardedAd.swift */; };
+		7EF43FFC29232EF70085BC56 /* AppOpenAd.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EF43FFB29232EF70085BC56 /* AppOpenAd.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -64,6 +65,7 @@
 		7EF43FF5292314E70085BC56 /* FullScreenModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FullScreenModifier.swift; sourceTree = "<group>"; };
 		7EF43FF7292315BB0085BC56 /* InterstitialAd.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InterstitialAd.swift; sourceTree = "<group>"; };
 		7EF43FF9292316240085BC56 /* RewardedAd.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RewardedAd.swift; sourceTree = "<group>"; };
+		7EF43FFB29232EF70085BC56 /* AppOpenAd.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppOpenAd.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -117,6 +119,7 @@
 				7E58B7B6292079B200BD62F0 /* DBHelper.swift */,
 				7E58B7B829207C3E00BD62F0 /* Model.swift */,
 				7E620D26291B8C7400B9B944 /* Utility.swift */,
+				7EF43FFB29232EF70085BC56 /* AppOpenAd.swift */,
 				7E9296252921C008003C63D6 /* BannerAdView.swift */,
 				7EF43FF5292314E70085BC56 /* FullScreenModifier.swift */,
 				7EF43FF7292315BB0085BC56 /* InterstitialAd.swift */,
@@ -243,6 +246,7 @@
 				7E58B7B5291FDCEE00BD62F0 /* NickView.swift in Sources */,
 				2152FB042600AC8F00CF470E /* iOSApp.swift in Sources */,
 				7EF43FF8292315BB0085BC56 /* InterstitialAd.swift in Sources */,
+				7EF43FFC29232EF70085BC56 /* AppOpenAd.swift in Sources */,
 				7E620D37291DD6EF00B9B944 /* ElevatorResultView.swift in Sources */,
 				7EF43FFA292316240085BC56 /* RewardedAd.swift in Sources */,
 				7E58B7B7292079B200BD62F0 /* DBHelper.swift in Sources */,
