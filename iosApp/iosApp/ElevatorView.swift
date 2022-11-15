@@ -10,7 +10,11 @@ import SwiftUI
 import shared
 
 struct ElevatorView: View {
+    // 전역 벼수
     @EnvironmentObject var userStore: UserStore
+    // 광고
+    @State var showRewardedAd: Bool = false
+    // 변수
     @State var elevatorNo: String = ""//"8088381"
     @State private var checkButton = false
     @State private var isLoading = false
@@ -103,7 +107,8 @@ struct ElevatorView: View {
                         dismissButton:
                                 .default(Text(ElavatorOK),
                                                 action: {
-                                                    showNextView = true
+                                                    // 리워드 전면광고 띄우기
+                                                    showRewardedAd = true
                                                 }
                                         )
                     )
@@ -129,6 +134,13 @@ struct ElevatorView: View {
             })
         }
         .statusBarHidden(true)
+        .presentRewardedAd(isPresented: $showRewardedAd, adUnitId: rewardId) {
+            print("Reward Granted")
+        }
+        .onReceive(NotificationCenter.default.publisher(for: .rewardedAdDidDismissFullScreenContent)) { _ in
+            // 전면광고 끝났을 때 결과 창으로
+            showNextView = true
+        }
         .fullScreenCover(isPresented: $showNextView) {
             ElevatorResultView()
         }

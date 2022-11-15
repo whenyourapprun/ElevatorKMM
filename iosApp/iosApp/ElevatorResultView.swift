@@ -10,7 +10,11 @@ import SwiftUI
 import shared
 
 struct ElevatorResultView: View {
+    // 전역 변수
     @EnvironmentObject var userStore: UserStore
+    // 전면 광고
+    @State var showIntersitialAd: Bool = false
+    // 지역 변수
     @State private var text = ""
     // 다국어 처리
     private let ResultLoading: LocalizedStringKey = "Loading"
@@ -103,7 +107,6 @@ struct ElevatorResultView: View {
                     .cornerRadius(16.0)
                     .padding([.horizontal])
                     .onTapGesture {
-                        showNextView = true
                         // 내부 디비에 검색 결과를 저장하자.
                         if let responseElevator = userStore.responseElevator {
                             let number = responseElevator.response.body.items[0].elevatorNo
@@ -114,6 +117,8 @@ struct ElevatorResultView: View {
                             print("number \(number), build \(build), date \(date)")
                             DBHelper().insertData(number: number, build: build, date: date)
                         }
+                        // 전면광고 띄우고
+                        showIntersitialAd = true
                     }
             }
         }
@@ -126,6 +131,11 @@ struct ElevatorResultView: View {
                 text = "\(resultNm.stringValue()) : \(ResultError.stringValue())"
             }
         })
+        .presentInterstitialAd(isPresented: $showIntersitialAd, adUnitId: fullId)
+        .onReceive(NotificationCenter.default.publisher(for: .interstitialAdDidDismissFullScreenContent)) { _ in
+            // 전면광고 끝났을 때 메인 창으로
+            showNextView = true
+        }
         .fullScreenCover(isPresented: $showNextView) {
             MainView()
         }

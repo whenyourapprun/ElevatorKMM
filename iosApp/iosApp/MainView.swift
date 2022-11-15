@@ -31,88 +31,86 @@ struct MainView: View {
     @State private var showBottomNextView = false
     
     var body: some View {
-        NavigationView {
-            VStack {
-                // 배너 광고
-                BannerAdView()
-                        .frame(width: UIScreen.main.bounds.width, height: GADPortraitAnchoredAdaptiveBannerAdSizeWithWidth(UIScreen.main.bounds.width).size.height)
-                // 내용 제목
-                CardView(title: Elevator, guide: ElevatorGuide, nextIndex: 0)
-                CardView(title: MyPage, guide: MyPageGuide, nextIndex: 1)
-                CardView(title: NickChange, guide: NickChangeGuide, nextIndex: 2)
-                // 공간
-                Spacer()
-                // 하단 메뉴
-                HStack {
-                    Text("⇧")
-                        .font(.largeTitle)
-                        .foregroundColor(select_1 ? .white : .text)
-                        .frame(maxWidth: .infinity, maxHeight: 70.0)
-                        .background(select_1 ? Color.selected : Color.not_selected)
-                        .cornerRadius(5.0)
-                        .scaleEffect(isAni_1 ? 0.9 : 1)
-                        .animation(ani)
-                        .onTapGesture {
-                            isAni_1 = true
-                            select_1 = true
-                            select_2 = false
-                            select_3 = false
-                            DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(100)) {
-                                isAni_1 = false
-                                showBottomNextView = true
-                            }
+        VStack {
+            // 배너 광고
+            BannerAdView()
+                    .frame(width: UIScreen.main.bounds.width, height: GADPortraitAnchoredAdaptiveBannerAdSizeWithWidth(UIScreen.main.bounds.width).size.height)
+            // 내용 제목
+            CardView(title: Elevator, guide: ElevatorGuide, nextIndex: 0)
+            CardView(title: MyPage, guide: MyPageGuide, nextIndex: 1)
+            CardView(title: NickChange, guide: NickChangeGuide, nextIndex: 2)
+            // 공간
+            Spacer()
+            // 하단 메뉴
+            HStack {
+                Text("⇧")
+                    .font(.largeTitle)
+                    .foregroundColor(select_1 ? .white : .text)
+                    .frame(maxWidth: .infinity, maxHeight: 70.0)
+                    .background(select_1 ? Color.selected : Color.not_selected)
+                    .cornerRadius(5.0)
+                    .scaleEffect(isAni_1 ? 0.9 : 1)
+                    .animation(ani)
+                    .onTapGesture {
+                        isAni_1 = true
+                        select_1 = true
+                        select_2 = false
+                        select_3 = false
+                        DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(100)) {
+                            isAni_1 = false
+                            showBottomNextView = true
                         }
-                        .fullScreenCover(isPresented: $showBottomNextView) {
-                            ElevatorView()
+                    }
+                    .fullScreenCover(isPresented: $showBottomNextView) {
+                        ElevatorView()
+                    }
+                Text("⚙︎")
+                    .font(.largeTitle)
+                    .foregroundColor(select_2 ? .white : .text)
+                    .frame(maxWidth: .infinity, maxHeight: 70.0)
+                    .background(select_2 ? Color.selected : Color.not_selected)
+                    .cornerRadius(5.0)
+                    .scaleEffect(isAni_2 ? 0.9 : 1)
+                    .animation(ani)
+                    .onTapGesture {
+                        isAni_2 = true
+                        select_1 = false
+                        select_2 = true
+                        select_3 = false
+                        DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(100)) {
+                            isAni_2 = false
+                            showBottomNextView = true
                         }
-                    Text("⚙︎")
-                        .font(.largeTitle)
-                        .foregroundColor(select_2 ? .white : .text)
-                        .frame(maxWidth: .infinity, maxHeight: 70.0)
-                        .background(select_2 ? Color.selected : Color.not_selected)
-                        .cornerRadius(5.0)
-                        .scaleEffect(isAni_2 ? 0.9 : 1)
-                        .animation(ani)
-                        .onTapGesture {
-                            isAni_2 = true
-                            select_1 = false
-                            select_2 = true
-                            select_3 = false
-                            DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(100)) {
-                                isAni_2 = false
-                                showBottomNextView = true
-                            }
+                    }
+                    .fullScreenCover(isPresented: $showBottomNextView) {
+                        MyPageView()
+                    }
+                Text("♺")
+                    .font(.largeTitle)
+                    .foregroundColor(select_3 ? .white : .text)
+                    .frame(maxWidth: .infinity, maxHeight: 70.0)
+                    .background(select_3 ? Color.selected : Color.not_selected)
+                    .cornerRadius(5.0)
+                    .scaleEffect(isAni_3 ? 0.9 : 1)
+                    .animation(ani)
+                    .onTapGesture {
+                        isAni_3 = true
+                        select_1 = false
+                        select_2 = false
+                        select_3 = true
+                        DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(100)) {
+                            isAni_3 = false
+                            showBottomNextView = true
                         }
-                        .fullScreenCover(isPresented: $showBottomNextView) {
-                            MyPageView()
-                        }
-                    Text("♺")
-                        .font(.largeTitle)
-                        .foregroundColor(select_3 ? .white : .text)
-                        .frame(maxWidth: .infinity, maxHeight: 70.0)
-                        .background(select_3 ? Color.selected : Color.not_selected)
-                        .cornerRadius(5.0)
-                        .scaleEffect(isAni_3 ? 0.9 : 1)
-                        .animation(ani)
-                        .onTapGesture {
-                            isAni_3 = true
-                            select_1 = false
-                            select_2 = false
-                            select_3 = true
-                            DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(100)) {
-                                isAni_3 = false
-                                showBottomNextView = true
-                            }
-                        }
-                        .fullScreenCover(isPresented: $showBottomNextView) {
-                            NickView()
-                        }
-                }
-                .padding([.horizontal], 16.0)
+                    }
+                    .fullScreenCover(isPresented: $showBottomNextView) {
+                        NickView()
+                    }
             }
-            .background(Color.back.ignoresSafeArea(.all))
-            .statusBarHidden(true)
+            .padding([.horizontal], 16.0)
         }
+        .background(Color.back.ignoresSafeArea(.all))
+        .statusBarHidden(true)
     }
 }
 
