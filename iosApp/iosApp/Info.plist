@@ -14,10 +14,6 @@
 	<string>$(PRODUCT_NAME)</string>
 	<key>CFBundlePackageType</key>
 	<string>$(PRODUCT_BUNDLE_PACKAGE_TYPE)</string>
-	<key>CFBundleShortVersionString</key>
-	<string>1.5</string>
-	<key>CFBundleVersion</key>
-	<string>5</string>
 	<key>GADApplicationIdentifier</key>
 	<string>ca-app-pub-4377563560880478~3165077592</string>
 	<key>GADIsAdManagerApp</key>

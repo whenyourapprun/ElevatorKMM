@@ -2,9 +2,11 @@ import SwiftUI
 import shared
 
 struct IntroView: View {
+    // 오프닝 광고
+    @ObservedObject var appOpen = AppOpen()
     // 타이머
     @State private var count: Double = 0.0
-    let timer = Timer.publish(every: 0.1, on: .main, in: .common).autoconnect()
+    @State var timer = Timer.publish(every: 0.1, on: .main, in: .common).autoconnect()
     // 다음 화면 이동
     @State private var showMainScreen = false
     // 다국어 처리
@@ -39,11 +41,25 @@ struct IntroView: View {
                 }
             }
             .padding(16.0)
-            .fullScreenCover(isPresented: $showMainScreen) {
-                MainView()
-            }
         }
         .statusBarHidden(true)
+        .onReceive(NotificationCenter.default.publisher(for: .openAdLoad), perform: { _ in
+            // 광고 로딩
+            if appOpen.appOpenAdLoaded {
+                // 타이머 종료
+                self.timer.upstream.connect().cancel()
+                // 광고 로딩
+                appOpen.ShowAppOpenAd()
+            }
+        })
+        .onReceive(NotificationCenter.default.publisher(for: .openAdDidDismissFullScreenContent)) { _ in
+            // 오프닝광고 끝났을 때 메인창으로 이동, 여기서 메인창으로 나와야 하는데 안나옴
+            print("IntroView openAdDidDismissFullScreenContent")
+            self.timer = Timer.publish(every: 0.1, on: .main, in: .common).autoconnect()
+        }
+        .fullScreenCover(isPresented: $showMainScreen) {
+            MainView()
+        }
 	}
 }
 

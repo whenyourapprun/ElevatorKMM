@@ -66,8 +66,11 @@ class UserStore: ObservableObject {
 
 // 노티 이벤트
 extension NSNotification.Name {
-    // 전면광고 마무리 이벤트
+    // 오프닝 이벤트
+    static let openAdDidDismissFullScreenContent = Notification.Name("openAdDidDismissFullScreenContent")
+    static let openAdLoad = Notification.Name("openAdLoad")
+    // 전면 이벤트
     static let interstitialAdDidDismissFullScreenContent = Notification.Name("interstitialAdDidDismissFullScreenContent")
-    // 리워드 전면광고 마무리 이벤트
+    // 리워드 전면 이벤트
     static let rewardedAdDidDismissFullScreenContent = Notification.Name("rewardedAdDidDismissFullScreenContent")
 }

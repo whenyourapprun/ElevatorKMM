@@ -28,6 +28,7 @@ class AppOpen: NSObject, GADFullScreenContentDelegate, ObservableObject {
             self.appOpenAd?.fullScreenContentDelegate = self
             self.appOpenAdLoaded = true
             print("LoadAppOpenAd")
+            NotificationCenter.default.post(name: .openAdLoad, object: nil)
         }
     }
 
@@ -42,7 +43,8 @@ class AppOpen: NSObject, GADFullScreenContentDelegate, ObservableObject {
     }
 
     func adDidDismissFullScreenContent(_ ad: GADFullScreenPresentingAd) {
-        self.LoadAppOpenAd()
+        // 오프닝 광고 끝났을 때
         print("AppOpenAd adDidDismissFullScreenContent")
+        NotificationCenter.default.post(name: .openAdDidDismissFullScreenContent, object: nil)
     }
 }
