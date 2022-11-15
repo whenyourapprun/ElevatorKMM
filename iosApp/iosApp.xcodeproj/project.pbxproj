@@ -116,14 +116,8 @@
 				7E58B7B4291FDCEE00BD62F0 /* NickView.swift */,
 				7E620D24291B4D8600B9B944 /* ElevatorView.swift */,
 				7E620D36291DD6EF00B9B944 /* ElevatorResultView.swift */,
-				7E58B7B6292079B200BD62F0 /* DBHelper.swift */,
-				7E58B7B829207C3E00BD62F0 /* Model.swift */,
-				7E620D26291B8C7400B9B944 /* Utility.swift */,
-				7EF43FFB29232EF70085BC56 /* AppOpenAd.swift */,
-				7E9296252921C008003C63D6 /* BannerAdView.swift */,
-				7EF43FF5292314E70085BC56 /* FullScreenModifier.swift */,
-				7EF43FF7292315BB0085BC56 /* InterstitialAd.swift */,
-				7EF43FF9292316240085BC56 /* RewardedAd.swift */,
+				7EF43FFE292330880085BC56 /* Public */,
+				7EF43FFD292330760085BC56 /* AdMob */,
 				7E620D32291CDE0B00B9B944 /* InfoPlist.strings */,
 				7E620D2C291CD49E00B9B944 /* Localizable.strings */,
 				7555FF8C242A565B00829871 /* Info.plist */,
@@ -137,6 +131,28 @@
 			children = (
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		7EF43FFD292330760085BC56 /* AdMob */ = {
+			isa = PBXGroup;
+			children = (
+				7EF43FFB29232EF70085BC56 /* AppOpenAd.swift */,
+				7E9296252921C008003C63D6 /* BannerAdView.swift */,
+				7EF43FF5292314E70085BC56 /* FullScreenModifier.swift */,
+				7EF43FF7292315BB0085BC56 /* InterstitialAd.swift */,
+				7EF43FF9292316240085BC56 /* RewardedAd.swift */,
+			);
+			path = AdMob;
+			sourceTree = "<group>";
+		};
+		7EF43FFE292330880085BC56 /* Public */ = {
+			isa = PBXGroup;
+			children = (
+				7E58B7B6292079B200BD62F0 /* DBHelper.swift */,
+				7E58B7B829207C3E00BD62F0 /* Model.swift */,
+				7E620D26291B8C7400B9B944 /* Utility.swift */,
+			);
+			path = Public;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
