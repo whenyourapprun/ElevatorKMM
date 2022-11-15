@@ -9,13 +9,17 @@
 import SwiftUI
 
 struct NickView: View {
+    // 광고
+    @State var showRewardedAd: Bool = false
+    // 지역 변수
     @State private var nick = ""
     @State private var checkButton = false
     // 다국어 처리
     private let NickChangeGuide: LocalizedStringKey = "NickChangeGuide"
     private let NickInput: LocalizedStringKey = "NickInput"
     // 뷰 전환
-    @State private var showNextView = false
+    @State private var showMainView = false
+    
     var body: some View {
         ZStack {
             Color.back.edgesIgnoringSafeArea(.all)
@@ -51,8 +55,8 @@ struct NickView: View {
                             UserDefaults.standard.set(nick, forKey: "nick")
                             // 터치하면 버튼 비활성
                             checkButton = false
-                            // 메인화면 이동
-                            showNextView = true
+                            // 리워드 전면광고 띄우기
+                            showRewardedAd = true
                         }
                     }, label: {
                         Text("OK")
@@ -77,7 +81,14 @@ struct NickView: View {
                 self.nick = nick
             }
         }
-        .fullScreenCover(isPresented: $showNextView) {
+        .presentRewardedAd(isPresented: $showRewardedAd, adUnitId: rewardId) {
+            print("Reward Granted")
+        }
+        .onReceive(NotificationCenter.default.publisher(for: .rewardedAdDidDismissFullScreenContent)) { _ in
+            // 전면광고 끝났을 때 메인 창으로
+            showMainView = true
+        }
+        .fullScreenCover(isPresented: $showMainView) {
             MainView()
         }
     }

@@ -9,6 +9,9 @@
 import SwiftUI
 
 struct MyPageView: View {
+    // 전면 광고
+    @State var showIntersitialAd: Bool = false
+    @State var isSelected = 0
     // 다국어 처리
     private let MyPageTitle: LocalizedStringKey = "MyPage"
     private let MyPageNickChange: LocalizedStringKey = "NickChange"
@@ -18,7 +21,7 @@ struct MyPageView: View {
     private let MyPageMain: LocalizedStringKey = "Main"
     private let MyPageError: LocalizedStringKey = "Error"
     // 뷰 전환
-    @State private var showNextView = false
+    @State private var showMainView = false
     @State private var showNickView = false
     @State private var nick: String? = UserDefaults.standard.string(forKey: "nick")
     @State private var itemList = [ELEVATOR_ITEM]()
@@ -42,7 +45,9 @@ struct MyPageView: View {
                     
                     HStack {
                         Button {
-                            showNickView = true
+                            // 전면광고 띄우고
+                            isSelected = 1
+                            showIntersitialAd = true
                         } label: {
                             Text(MyPageNickChange)
                                 .font(.body)
@@ -101,7 +106,9 @@ struct MyPageView: View {
                         .cornerRadius(16.0)
                         .padding([.horizontal])
                         .onTapGesture {
-                            showNextView = true
+                            // 전면광고 띄우고
+                            isSelected = 2
+                            showIntersitialAd = true
                         }
                 }
             }
@@ -116,7 +123,16 @@ struct MyPageView: View {
             itemList.removeAll()
             itemList = DBHelper().getHistory()
         })
-        .fullScreenCover(isPresented: $showNextView) {
+        .presentInterstitialAd(isPresented: $showIntersitialAd, adUnitId: fullId)
+        .onReceive(NotificationCenter.default.publisher(for: .interstitialAdDidDismissFullScreenContent)) { _ in
+            // 전면광고 끝났을 때
+            if isSelected == 1 {
+                showNickView = true
+            } else if isSelected == 2 {
+                showMainView = true
+            }
+        }
+        .fullScreenCover(isPresented: $showMainView) {
             MainView()
         }
         .fullScreenCover(isPresented: $showNickView) {
