@@ -16,6 +16,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
@@ -34,7 +35,7 @@ class IntroActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            Surface(color = Color.LightGray) {
+            Surface(color = colorResource(id = R.color.back)) {
                 IntroContent(seconds)
             }
             timer(period = 50) {
@@ -74,7 +75,7 @@ fun IntroContent(sec: Int) {
                         .background(Color.White),
                     textAlign = TextAlign.Center,
                     fontSize = 21.sp,
-                    color = Color.DarkGray,
+                    color = colorResource(id = R.color.text),
                     text = stringResource(R.string.Elevator)
                 )
                 Spacer(modifier = Modifier.height(16.dp))
@@ -83,8 +84,8 @@ fun IntroContent(sec: Int) {
                         .fillMaxWidth()
                         .height(16.dp)
                         .padding(16.dp, 0.dp),
-                    backgroundColor = Color.LightGray,
-                    color = Color.DarkGray,
+                    backgroundColor = colorResource(id = R.color.not_selected),
+                    color = colorResource(id = R.color.selected),
                     progress = sec.toFloat() / 100.0f
                 )
                 Spacer(modifier = Modifier.height(16.dp))

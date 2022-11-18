@@ -12,6 +12,7 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
@@ -37,12 +38,12 @@ fun MainCompose(name: String) {
             modifier = Modifier
                 .fillMaxSize()
                 .padding(it)
-                .background(Color.LightGray)
+                .background(colorResource(id = R.color.back))
         ) {
             Box(
                 modifier = Modifier
-                .fillMaxSize()
-                .weight(9f)
+                    .fillMaxSize()
+                    .weight(9f)
             ) {
                 LazyColumn {
                     item {
@@ -65,7 +66,7 @@ fun MainCompose(name: String) {
                 modifier = Modifier
                     .fillMaxSize()
                     .weight(1f)
-                    .background(Color.Gray)
+                    .background(color = colorResource(id = R.color.not_selected))
             ) {
                 BottomView()
             }
@@ -140,7 +141,10 @@ fun BottomView() {
 fun MainBottomButton(title: String){
     Surface(
         color = Color.Transparent,
-        modifier = Modifier.height(70.dp).fillMaxWidth().padding(8.dp)
+        modifier = Modifier
+            .height(70.dp)
+            .fillMaxWidth()
+            .padding(8.dp)
     ){
         Button(
             onClick = { },
