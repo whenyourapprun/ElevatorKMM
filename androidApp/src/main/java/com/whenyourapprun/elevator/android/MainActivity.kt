@@ -3,6 +3,7 @@ package com.whenyourapprun.elevator.android
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -11,7 +12,6 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.layout.layout
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
@@ -24,9 +24,7 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             ElevatorTheme {
-                Surface(color = Color.LightGray) {
-                    MainCompose("Android")
-                }
+                MainCompose("Android")
             }
         }
     }
@@ -34,27 +32,49 @@ class MainActivity : ComponentActivity() {
 
 @Composable
 fun MainCompose(name: String) {
-    Column {
-        LazyColumn {
-            item {
-                ContentCard(stringResource(id = R.string.Elevator), stringResource(id = R.string.ElevatorGuide))
-                ContentCard("Title 2", "detail 2")
-                //ContentCard("Title 3", "detail 3")
-                //ContentCard("Title 4", "detail 4")
+    Scaffold {
+        Column(
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(it)
+                .background(Color.LightGray)
+        ) {
+            Box(modifier = Modifier
+                .fillMaxSize()
+                .weight(9f)) {
+                LazyColumn {
+                    item {
+                        ContentCard(stringResource(id = R.string.Elevator), stringResource(id = R.string.ElevatorGuide), onClickSource = {
+                            print("1 click")
+                        })
+                        ContentCard("Title 2", "detail 2", onClickSource = {
+                            print("2 click")
+                        })
+                        ContentCard("Title 3", "detail 3", onClickSource = {
+                            print("3 click")
+                        })
+                        ContentCard("Title 4", "detail 4", onClickSource = {
+                            print("4 click")
+                        })
+                    }
+                }
+            }
+            Box(modifier = Modifier.fillMaxSize().weight(1f)) {
+                BottomView()
             }
         }
-        Spacer(modifier = Modifier.weight(1f))
-        BottomView()
     }
 }
 
+@OptIn(ExperimentalMaterialApi::class)
 @Composable
-fun ContentCard(title: String, detail: String) {
+fun ContentCard(title: String, detail: String, onClickSource: () -> Unit) {
     Card(
-        Modifier
+        modifier = Modifier
             .padding(16.dp)
             .fillMaxSize(),
-        shape = RoundedCornerShape(16.dp)
+        shape = RoundedCornerShape(16.dp),
+        onClick = { onClickSource }
     ) {
         Box(contentAlignment = Alignment.Center) {
             Column(
@@ -72,27 +92,16 @@ fun ContentCard(title: String, detail: String) {
 
 @Composable
 fun BottomView() {
-    Row(modifier = Modifier.fillMaxWidth()) {
-        Box(modifier = Modifier
-            .weight(1f, fill = true)
-            .padding(8.dp)) {
-            MainBottomButton("1")
-        }
-        Box(modifier = Modifier
-            .weight(1f, fill = true)
-            .padding(8.dp)) {
-            MainBottomButton("2")
-        }
-        Box(modifier = Modifier
-            .weight(1f, fill = true)
-            .padding(8.dp)) {
-            MainBottomButton("3")
-        }
-        Box(modifier = Modifier
-            .weight(1f, fill = true)
-            .padding(8.dp)) {
-            MainBottomButton("4")
-        }
+    Row(
+        horizontalArrangement = Arrangement.SpaceAround,
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(8.dp)
+    ) {
+        MainBottomButton("1")
+        MainBottomButton("2")
+        MainBottomButton("3")
+        MainBottomButton("4")
     }
 }
 
@@ -100,20 +109,13 @@ fun BottomView() {
 fun MainBottomButton(title: String){
     Surface(
         color = Color.Transparent,
-        modifier = Modifier
-            .layout { measurable, constraints ->
-                val placeable = measurable.measure((constraints))
-                layout(placeable.width, placeable.width) {
-                    placeable.place(x = 0, y = 0, zIndex = 0f)
-                }
-            }
-            .fillMaxSize()
+        modifier = Modifier.height(70.dp)
     ){
         Button(
             onClick = { },
-            colors = ButtonDefaults.buttonColors(backgroundColor = Color.DarkGray, contentColor = Color.White, disabledBackgroundColor = Color.LightGray, disabledContentColor = Color.Black)
+            colors = ButtonDefaults.buttonColors(backgroundColor = Color.White, contentColor = Color.Black, disabledBackgroundColor = Color.LightGray, disabledContentColor = Color.Black)
         ) {
-            Text(text = title, color = Color.White)
+            Text(text = title)
         }
     }
 }
