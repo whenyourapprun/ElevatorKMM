@@ -43,4 +43,6 @@
     <string name="shuttleSection">Shuttle Section</string>
     <string name="sigunguNm">city and county name</string>
     <string name="undgrndFloorCnt">Underground Floor Count</string>
+    <string name="title_activity_my_page">MyPageActivity</string>
+    <string name="title_activity_nick">NickActivity</string>
 </resources>

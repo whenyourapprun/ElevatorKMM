@@ -8,6 +8,7 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.*
 import androidx.compose.runtime.*
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.colorResource
@@ -38,7 +39,8 @@ class IntroActivity : ComponentActivity() {
                             .fillMaxSize()
                             .padding(it)
                             .background(colorResource(id = R.color.back)),
-                        verticalArrangement = Arrangement.Center
+                        verticalArrangement = Arrangement.Center,
+                        horizontalAlignment = Alignment.CenterHorizontally
                     ) {
                         Box(
                             modifier = Modifier
@@ -84,7 +86,6 @@ class IntroActivity : ComponentActivity() {
                 // 메인화면으로 이동
                 val intent = Intent(applicationContext, MainActivity::class.java)
                 startActivity(intent)
-                overridePendingTransition(R.anim.fade_in, R.anim.fade_out)
                 finish()
             }
         }

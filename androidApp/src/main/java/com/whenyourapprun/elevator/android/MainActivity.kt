@@ -106,6 +106,8 @@ class MainActivity : ComponentActivity() {
 @Composable
 fun ContentCard(title: String, detail: String) {
     val elevator = stringResource(id = R.string.Elevator)
+    val myPage = stringResource(id = R.string.MyPage)
+    val nickChange = stringResource(id = R.string.NickChange)
     val context = LocalContext.current
     Card(
         modifier = Modifier
@@ -113,10 +115,15 @@ fun ContentCard(title: String, detail: String) {
             .fillMaxSize()
             .clickable {
                 Log.d(TAG, "content card touch $title")
+                // 선택한 곳에 따라 이동
                 if (title == elevator) {
-                    // 메인화면으로 이동
-                    Log.d(TAG, "elevator touch")
                     val intent = Intent(context, ElevatorActivity::class.java)
+                    context.startActivity(intent)
+                } else if (title == myPage) {
+                    val intent = Intent(context, MyPageActivity::class.java)
+                    context.startActivity(intent)
+                } else if (title == nickChange) {
+                    val intent = Intent(context, NickActivity::class.java)
                     context.startActivity(intent)
                 }
             },
@@ -137,9 +144,9 @@ fun ContentCard(title: String, detail: String) {
     }
 }
 
-
 @Composable
 fun MainBottomButton(title: String){
+    val context = LocalContext.current
     Surface(
         color = Color.Transparent,
         modifier = Modifier

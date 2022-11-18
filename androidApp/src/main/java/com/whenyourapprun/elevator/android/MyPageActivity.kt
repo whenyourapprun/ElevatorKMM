@@ -8,20 +8,20 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material.*
-import androidx.compose.runtime.Composable
+import androidx.compose.material.Scaffold
+import androidx.compose.material.Text
+import androidx.compose.material.rememberScaffoldState
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.colorResource
-import androidx.compose.ui.tooling.preview.Preview
 import com.whenyourapprun.elevator.android.ui.theme.ElevatorTheme
 
-class ElevatorActivity : ComponentActivity() {
+class MyPageActivity : ComponentActivity() {
     companion object {
-        private const val TAG = "ElevatorActivity"
+        private const val TAG = "MyPageActivity"
     }
-
+    
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
@@ -38,7 +38,7 @@ class ElevatorActivity : ComponentActivity() {
                         verticalArrangement = Arrangement.Center,
                         horizontalAlignment = Alignment.CenterHorizontally
                     ) {
-                        Text(text = "ElevatorActivity")
+                        Text(text = "MyPageActivity")
                     }
                 }
             }

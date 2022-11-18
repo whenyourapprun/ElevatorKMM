@@ -9,6 +9,24 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".NickActivity"
+            android:exported="false"
+            android:label="@string/title_activity_nick"
+            android:theme="@style/AppTheme">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".MyPageActivity"
+            android:exported="false"
+            android:label="@string/title_activity_my_page"
+            android:theme="@style/AppTheme">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
             android:name=".ElevatorActivity"
             android:exported="false"
             android:label="@string/title_activity_elevator"
