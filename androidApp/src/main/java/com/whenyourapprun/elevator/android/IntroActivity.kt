@@ -31,9 +31,9 @@ class IntroActivity : ComponentActivity() {
         setContent {
             ElevatorTheme {
                 val scaffoldState = rememberScaffoldState()
-                val coroutineScope = rememberCoroutineScope()
+                val scope = rememberCoroutineScope()
                 // 발판 사용 - 머터리얼
-                Scaffold {
+                Scaffold(scaffoldState = scaffoldState) {
                     Column(
                         modifier = Modifier
                             .fillMaxSize()

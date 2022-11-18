@@ -34,9 +34,9 @@ class MainActivity : ComponentActivity() {
         setContent {
             ElevatorTheme {
                 val scaffoldState = rememberScaffoldState()
-                val coroutineScope = rememberCoroutineScope()
+                val scope = rememberCoroutineScope()
                 // 발판 사용 - 머터리얼
-                Scaffold {
+                Scaffold(scaffoldState = scaffoldState) {
                     // 전체 적용 및 배경 색상 설정
                     Column(
                         modifier = Modifier
