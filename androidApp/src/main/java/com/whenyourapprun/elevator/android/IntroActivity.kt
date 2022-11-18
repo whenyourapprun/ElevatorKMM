@@ -75,7 +75,7 @@ fun IntroContent(sec: Int) {
                     textAlign = TextAlign.Center,
                     fontSize = 21.sp,
                     color = Color.DarkGray,
-                    text = stringResource(R.string.app_name)
+                    text = stringResource(R.string.Elevator)
                 )
                 Spacer(modifier = Modifier.height(16.dp))
                 LinearProgressIndicator(

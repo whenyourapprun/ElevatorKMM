@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">엘리베이터</string>
+    <string name="title_activity_elevator">ElevatorActivity</string>
+    <string name="Elevator">엘리베이터</string>
+    <string name="ElevatorGuide">엘리베이터 정보를 알아볼 수 있어요.</string>
+    <string name="MyPage">마이페이지</string>
+    <string name="MyPageGuide">설정 및 이력을 확인할 수 있어요.</string>
+    <string name="NickChange">별명 수정</string>
+    <string name="NickSample">홍길동</string>
+    <string name="NickChangeGuide">앱에서 사용하는 별명을 수정할 수 있어요.</string>
+    <string name="NickInput">별명 입력</string>
+    <string name="ElevatorInputGuide">엘리베이터 번호를 입력하여 정보를 확인하세요.</string>
+    <string name="ElevatorInputWait">엘리베이터 번호에 대한 결과를 기다리고 있어요.</string>
+    <string name="OK">확인</string>
+    <string name="ReceivedData">수신된 데이터</string>
+    <string name="ReceivedDetail">데이터 수신이 완료되었습니다.</string>
+    <string name="Loading">수신중</string>
+    <string name="Main">메인</string>
+    <string name="Error">오류</string>
+    <string name="address1">소재지1</string>
+    <string name="address2">소재지2</string>
+    <string name="applcBeDt">최종검사유효시간(시작일)</string>
+    <string name="applcEnDt">최종검사유효시간(종료일)</string>
+    <string name="areaNm">시도명</string>
+    <string name="buldMgtNo1">건물관리번호1</string>
+    <string name="buldMgtNo2">건물관리번호2</string>
+    <string name="buldNm">건물명</string>
+    <string name="elevatorNo">승강기고유번호</string>
+    <string name="elvtrAsignNo">승강기호기</string>
+    <string name="elvtrDetailForm">승강기세부형식</string>
+    <string name="elvtrDivNm">승강기구분</string>
+    <string name="elvtrForm">승강기형식</string>
+    <string name="elvtrKindNm">승강기종류</string>
+    <string name="elvtrSttsNm">승강기상태</string>
+    <string name="frstInstallationDe">최초설치일자</string>
+    <string name="groundFloorCnt">지상층수</string>
+    <string name="installationDe">설치일자</string>
+    <string name="installationPlace">설치장소</string>
+    <string name="liveLoad">적재하중</string>
+    <string name="ratedCap">최대정원</string>
+    <string name="resultNm">최종검사판정결과</string>
+    <string name="shuttleFloorCnt">운행층수</string>
+    <string name="shuttleSection">운행구간</string>
+    <string name="sigunguNm">시군구명</string>
+    <string name="undgrndFloorCnt">지하층수</string>
+</resources>
