@@ -45,19 +45,22 @@ class MainActivity : ComponentActivity() {
             ElevatorTheme {
                 val scaffoldState = rememberScaffoldState()
                 val coroutineScope = rememberCoroutineScope()
-
+                // 발판 사용 - 머터리얼
                 Scaffold {
+                    // 전체 적용 및 배경 색상 설정
                     Column(
                         modifier = Modifier
                             .fillMaxSize()
                             .padding(it)
                             .background(colorResource(id = R.color.back))
                     ) {
+                        // 가운데 90% 크기
                         Box(
                             modifier = Modifier
                                 .fillMaxSize()
                                 .weight(9f)
                         ) {
+                            // 리스트 아이템으로 내용 채움
                             LazyColumn {
                                 item {
                                     ContentCard(stringResource(id = R.string.Elevator), stringResource(id = R.string.ElevatorGuide))
@@ -66,13 +69,42 @@ class MainActivity : ComponentActivity() {
                                 }
                             }
                         }
+                        // 하단 높이 10%
                         Box(
                             modifier = Modifier
                                 .fillMaxSize()
                                 .weight(1f)
                                 .background(color = colorResource(id = R.color.not_selected))
                         ) {
-                            BottomView()
+                            // 하단 뷰
+                            Row(
+                                horizontalArrangement = Arrangement.SpaceAround,
+                                modifier = Modifier
+                                    .fillMaxWidth()
+                                    .padding(8.dp)
+                            ) {
+                                Box(
+                                    modifier = Modifier
+                                        .fillMaxWidth()
+                                        .weight(1f)
+                                ) {
+                                    MainBottomButton("⇧")
+                                }
+                                Box(
+                                    modifier = Modifier
+                                        .fillMaxWidth()
+                                        .weight(1f)
+                                ) {
+                                    MainBottomButton("⚙")
+                                }
+                                Box(
+                                    modifier = Modifier
+                                        .fillMaxWidth()
+                                        .weight(1f)
+                                ) {
+                                    MainBottomButton("♺")
+                                }
+                            }
                         }
                     }
                 }
@@ -115,37 +147,6 @@ fun ContentCard(title: String, detail: String) {
     }
 }
 
-@Composable
-fun BottomView() {
-    Row(
-        horizontalArrangement = Arrangement.SpaceAround,
-        modifier = Modifier
-            .fillMaxWidth()
-            .padding(8.dp)
-    ) {
-        Box(
-            modifier = Modifier
-                .fillMaxWidth()
-                .weight(1f)
-        ) {
-            MainBottomButton("⇧")
-        }
-        Box(
-            modifier = Modifier
-                .fillMaxWidth()
-                .weight(1f)
-        ) {
-            MainBottomButton("⚙")
-        }
-        Box(
-            modifier = Modifier
-                .fillMaxWidth()
-                .weight(1f)
-        ) {
-            MainBottomButton("♺")
-        }
-    }
-}
 
 @Composable
 fun MainBottomButton(title: String){
