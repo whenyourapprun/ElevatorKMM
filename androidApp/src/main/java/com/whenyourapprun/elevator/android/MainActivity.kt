@@ -39,9 +39,11 @@ fun MainCompose(name: String) {
                 .padding(it)
                 .background(Color.LightGray)
         ) {
-            Box(modifier = Modifier
+            Box(
+                modifier = Modifier
                 .fillMaxSize()
-                .weight(9f)) {
+                .weight(9f)
+            ) {
                 LazyColumn {
                     item {
                         ContentCard(stringResource(id = R.string.Elevator), stringResource(id = R.string.ElevatorGuide), onClickSource = {
@@ -59,7 +61,12 @@ fun MainCompose(name: String) {
                     }
                 }
             }
-            Box(modifier = Modifier.fillMaxSize().weight(1f)) {
+            Box(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .weight(1f)
+                    .background(Color.Gray)
+            ) {
                 BottomView()
             }
         }
@@ -98,10 +105,34 @@ fun BottomView() {
             .fillMaxWidth()
             .padding(8.dp)
     ) {
-        MainBottomButton("1")
-        MainBottomButton("2")
-        MainBottomButton("3")
-        MainBottomButton("4")
+        Box(
+            modifier = Modifier
+                .fillMaxWidth()
+                .weight(1f)
+        ) {
+            MainBottomButton("1")
+        }
+        Box(
+            modifier = Modifier
+                .fillMaxWidth()
+                .weight(1f)
+        ) {
+            MainBottomButton("2")
+        }
+        Box(
+            modifier = Modifier
+                .fillMaxWidth()
+                .weight(1f)
+        ) {
+            MainBottomButton("3")
+        }
+        Box(
+            modifier = Modifier
+                .fillMaxWidth()
+                .weight(1f)
+        ) {
+            MainBottomButton("4")
+        }
     }
 }
 
@@ -109,7 +140,7 @@ fun BottomView() {
 fun MainBottomButton(title: String){
     Surface(
         color = Color.Transparent,
-        modifier = Modifier.height(70.dp)
+        modifier = Modifier.height(70.dp).fillMaxWidth().padding(8.dp)
     ){
         Button(
             onClick = { },
