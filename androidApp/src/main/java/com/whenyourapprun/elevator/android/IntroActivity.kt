@@ -93,9 +93,3 @@ fun IntroContent(sec: Int) {
         }
     }
 }
-
-@Preview
-@Composable
-fun PreviewIntro() {
-    IntroContent(69)
-}

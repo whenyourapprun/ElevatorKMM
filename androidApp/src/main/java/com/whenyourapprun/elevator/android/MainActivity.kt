@@ -1,9 +1,16 @@
 package com.whenyourapprun.elevator.android
 
+import android.annotation.SuppressLint
+import android.content.ContentValues.TAG
+import android.content.Intent
+import android.content.res.Resources
 import android.os.Bundle
+import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.annotation.StringRes
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -12,81 +19,91 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalConfiguration
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.core.content.ContextCompat
+import androidx.core.content.ContextCompat.startActivity
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.LifecycleCoroutineScope
 import com.whenyourapprun.elevator.android.ui.theme.*
+import kotlinx.coroutines.launch
 
 class MainActivity : ComponentActivity() {
+    companion object {
+        private const val TAG = "MainActivity"
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
             ElevatorTheme {
-                MainCompose("Android")
-            }
-        }
-    }
-}
+                val scaffoldState = rememberScaffoldState()
+                val coroutineScope = rememberCoroutineScope()
 
-@Composable
-fun MainCompose(name: String) {
-    Scaffold {
-        Column(
-            modifier = Modifier
-                .fillMaxSize()
-                .padding(it)
-                .background(colorResource(id = R.color.back))
-        ) {
-            Box(
-                modifier = Modifier
-                    .fillMaxSize()
-                    .weight(9f)
-            ) {
-                LazyColumn {
-                    item {
-                        ContentCard(stringResource(id = R.string.Elevator), stringResource(id = R.string.ElevatorGuide), onClickSource = {
-                            print("1 click")
-                        })
-                        ContentCard("Title 2", "detail 2", onClickSource = {
-                            print("2 click")
-                        })
-                        ContentCard("Title 3", "detail 3", onClickSource = {
-                            print("3 click")
-                        })
-                        ContentCard("Title 4", "detail 4", onClickSource = {
-                            print("4 click")
-                        })
+                Scaffold {
+                    Column(
+                        modifier = Modifier
+                            .fillMaxSize()
+                            .padding(it)
+                            .background(colorResource(id = R.color.back))
+                    ) {
+                        Box(
+                            modifier = Modifier
+                                .fillMaxSize()
+                                .weight(9f)
+                        ) {
+                            LazyColumn {
+                                item {
+                                    ContentCard(stringResource(id = R.string.Elevator), stringResource(id = R.string.ElevatorGuide))
+                                    ContentCard(stringResource(id = R.string.MyPage), stringResource(id = R.string.MyPageGuide))
+                                    ContentCard(stringResource(id = R.string.NickChange), stringResource(id = R.string.NickChangeGuide))
+                                }
+                            }
+                        }
+                        Box(
+                            modifier = Modifier
+                                .fillMaxSize()
+                                .weight(1f)
+                                .background(color = colorResource(id = R.color.not_selected))
+                        ) {
+                            BottomView()
+                        }
                     }
                 }
             }
-            Box(
-                modifier = Modifier
-                    .fillMaxSize()
-                    .weight(1f)
-                    .background(color = colorResource(id = R.color.not_selected))
-            ) {
-                BottomView()
-            }
         }
     }
 }
 
-@OptIn(ExperimentalMaterialApi::class)
 @Composable
-fun ContentCard(title: String, detail: String, onClickSource: () -> Unit) {
+fun ContentCard(title: String, detail: String) {
+    val elevator = stringResource(id = R.string.Elevator)
+    val context = LocalContext.current
     Card(
         modifier = Modifier
             .padding(16.dp)
-            .fillMaxSize(),
-        shape = RoundedCornerShape(16.dp),
-        onClick = { onClickSource }
+            .fillMaxSize()
+            .clickable {
+                Log.d(TAG, "content card touch $title")
+                if (title == elevator) {
+                    // 메인화면으로 이동
+                    Log.d(TAG, "elevator touch")
+                    val intent = Intent(context, ElevatorActivity::class.java)
+                    context.startActivity(intent)
+                }
+            },
+        shape = RoundedCornerShape(16.dp)
     ) {
         Box(contentAlignment = Alignment.Center) {
             Column(
-                horizontalAlignment = Alignment.CenterHorizontally
+                horizontalAlignment = Alignment.CenterHorizontally,
+                modifier = Modifier.padding(horizontal = 16.dp)
             ) {
                 Spacer(modifier = Modifier.height(32.dp))
                 Text(text = title, fontSize = 34.sp, fontWeight = FontWeight.Bold)
@@ -111,28 +128,21 @@ fun BottomView() {
                 .fillMaxWidth()
                 .weight(1f)
         ) {
-            MainBottomButton("1")
+            MainBottomButton("⇧")
         }
         Box(
             modifier = Modifier
                 .fillMaxWidth()
                 .weight(1f)
         ) {
-            MainBottomButton("2")
+            MainBottomButton("⚙")
         }
         Box(
             modifier = Modifier
                 .fillMaxWidth()
                 .weight(1f)
         ) {
-            MainBottomButton("3")
-        }
-        Box(
-            modifier = Modifier
-                .fillMaxWidth()
-                .weight(1f)
-        ) {
-            MainBottomButton("4")
+            MainBottomButton("♺")
         }
     }
 }
@@ -144,21 +154,20 @@ fun MainBottomButton(title: String){
         modifier = Modifier
             .height(70.dp)
             .fillMaxWidth()
-            .padding(8.dp)
+            .padding(horizontal = 8.dp)
     ){
         Button(
-            onClick = { },
-            colors = ButtonDefaults.buttonColors(backgroundColor = Color.White, contentColor = Color.Black, disabledBackgroundColor = Color.LightGray, disabledContentColor = Color.Black)
+            onClick = {
+                      Log.d(TAG, "MainBottomButton click $title")
+            },
+            colors = ButtonDefaults.buttonColors(
+                backgroundColor = colorResource(id = R.color.selected), 
+                contentColor = colorResource(id = R.color.white), 
+                disabledBackgroundColor = colorResource(id = R.color.not_selected), 
+                disabledContentColor = colorResource(id = R.color.text)
+            )
         ) {
             Text(text = title)
         }
-    }
-}
-
-@Preview
-@Composable
-fun PreviewMain() {
-    ElevatorTheme {
-        MainCompose("Android")
     }
 }
