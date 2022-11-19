@@ -28,6 +28,8 @@ import androidx.compose.ui.unit.dp
 import com.whenyourapprun.elevator.Elevator
 import com.whenyourapprun.elevator.android.ui.theme.ElevatorTheme
 import kotlinx.coroutines.launch
+import java.text.SimpleDateFormat
+import java.util.Calendar
 
 class ElevatorActivity : ComponentActivity() {
     companion object {
@@ -115,7 +117,7 @@ class ElevatorActivity : ComponentActivity() {
                                     onClick = {
                                         // 키보드 감추기
                                         keyboardController?.hide()
-                                        // 스낵바로 입력 창 띄워보자
+                                        /*/ 스낵바로 입력 창 띄워보자
                                         scope.launch {
                                             scaffoldState.snackbarHostState.showSnackbar("elevator no ${textFieldValue.value}")
                                         }
@@ -125,7 +127,15 @@ class ElevatorActivity : ComponentActivity() {
                                         scope.launch {
                                             // 엘리베이터 번호 중에 숫자만 추출하자.
                                             val elevatorNo = textFieldValue.value.text.replace("-", "")
+                                            Log.d(TAG, "elevatorNo $elevatorNo")
                                             val itemList = Elevator().getElevatorInfo(elevatorNo).response.body.items
+                                            // 내부 디비에 결과 저장.
+                                            val dbHelper = DBHelper(context)
+                                            val sqlDB = dbHelper.writableDatabase
+                                            val df = SimpleDateFormat("yyyy.MM.dd HH:mm:ss")
+                                            val now = Calendar.getInstance().time
+                                            val date = df.format(now)
+                                            dbHelper.insertData(sqlDB, itemList[0].elevatorNo, itemList[0].buldNm, date)
                                         }
                                     },
                                     colors = ButtonDefaults.buttonColors(
