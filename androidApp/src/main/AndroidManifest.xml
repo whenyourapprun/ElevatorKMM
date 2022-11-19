@@ -12,7 +12,8 @@
             android:name=".NickActivity"
             android:exported="false"
             android:label="@string/title_activity_nick"
-            android:theme="@style/AppTheme" />
+            android:theme="@style/AppTheme"
+            android:windowSoftInputMode="adjustResize" />
         <activity
             android:name=".MyPageActivity"
             android:exported="false"

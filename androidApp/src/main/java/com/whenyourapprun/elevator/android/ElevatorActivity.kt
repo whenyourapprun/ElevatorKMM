@@ -1,9 +1,7 @@
 package com.whenyourapprun.elevator.android
 
-import android.content.Intent
 import android.os.Bundle
 import android.util.Log
-import android.view.WindowManager
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.background
@@ -12,22 +10,22 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.*
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.TextRange
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
-import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.unit.dp
+import com.whenyourapprun.elevator.Elevator
 import com.whenyourapprun.elevator.android.ui.theme.ElevatorTheme
 import kotlinx.coroutines.launch
 
@@ -44,7 +42,16 @@ class ElevatorActivity : ComponentActivity() {
             ElevatorTheme {
                 val scaffoldState = rememberScaffoldState()
                 val scope = rememberCoroutineScope()
-                val (text, setValue) = remember { mutableStateOf("") }
+                //var text by remember { mutableStateOf(TextFieldValue("")) }
+                var textFieldValue = remember {
+                    mutableStateOf(
+                        TextFieldValue(
+                            text = "",
+                            selection = TextRange(0)
+                        )
+                    )
+                }
+                val focusManager = LocalFocusManager.current
                 val keyboardController = LocalSoftwareKeyboardController.current
                 val context = LocalContext.current
                 // 발판 사용 - 머터리얼
@@ -72,8 +79,20 @@ class ElevatorActivity : ComponentActivity() {
                                     modifier = Modifier
                                         .fillMaxWidth()
                                         .padding(16.dp),
-                                    value = text,
-                                    onValueChange = setValue,
+                                    value = textFieldValue.value,
+                                    onValueChange = {
+                                        var newText = it.text
+                                        if (it.text.length == 4) {
+                                            newText = it.text.plus("-")
+                                        }
+                                        if (it.text.length > 8) {
+                                            newText = ""
+                                        }
+                                        textFieldValue.value = TextFieldValue(
+                                            text = newText,
+                                            selection = TextRange(newText.length)
+                                        )
+                                    },
                                     label = { Text(stringResource(id = R.string.ElevatorInputGuide)) },
                                     placeholder = { Text(text = "8088-381") },
                                     keyboardOptions = KeyboardOptions(
@@ -81,7 +100,11 @@ class ElevatorActivity : ComponentActivity() {
                                         imeAction = ImeAction.Done
                                     ),
                                     keyboardActions = KeyboardActions(
-                                        onDone = { keyboardController?.hide() }
+                                        onDone = {
+                                            // cancel focus and hide keyboard
+                                            focusManager.clearFocus()
+                                            keyboardController?.hide()
+                                        }
                                     )
                                 )
                                 Button(
@@ -94,11 +117,16 @@ class ElevatorActivity : ComponentActivity() {
                                         keyboardController?.hide()
                                         // 스낵바로 입력 창 띄워보자
                                         scope.launch {
-                                            scaffoldState.snackbarHostState.showSnackbar("elevator no $text")
+                                            scaffoldState.snackbarHostState.showSnackbar("elevator no ${textFieldValue.value}")
                                         }
                                         // 로그 찍어보자
-                                        Log.d(TAG, "elevator no $text")
+                                        Log.d(TAG, "elevator no ${textFieldValue.value}")
                                         // */
+                                        scope.launch {
+                                            // 엘리베이터 번호 중에 숫자만 추출하자.
+                                            val elevatorNo = textFieldValue.value.text.replace("-", "")
+                                            val itemList = Elevator().getElevatorInfo(elevatorNo).response.body.items
+                                        }
                                     },
                                     colors = ButtonDefaults.buttonColors(
                                         backgroundColor = colorResource(id = R.color.selected),

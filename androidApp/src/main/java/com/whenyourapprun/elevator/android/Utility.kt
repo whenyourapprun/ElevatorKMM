@@ -7,22 +7,13 @@ import android.os.Build
 import android.util.DisplayMetrics
 import android.view.WindowInsets
 import android.view.WindowManager
+import com.whenyourapprun.elevator.Elevator
+import com.whenyourapprun.elevator.Item
 import java.util.*
 
 class Utility {
     companion object {
         private const val SHARED_NAME = "ElevatorConfig"
-    }
-
-    fun getNick(context: Context): String {
-        val sharedPref = context.getSharedPreferences(SHARED_NAME, Context.MODE_PRIVATE)
-        return sharedPref.getString("nick", "").toString()
-    }
-    fun setNick(context: Context, nick: String) {
-        val sharedPref = context.getSharedPreferences(SHARED_NAME, Context.MODE_PRIVATE)
-        val editor = sharedPref.edit()
-        editor.putString("nick", nick)
-        editor.commit()
     }
 
     fun getUUID(context: Context): String {
@@ -33,6 +24,17 @@ class Utility {
         val sharedPref = context.getSharedPreferences(SHARED_NAME, Context.MODE_PRIVATE)
         val editor = sharedPref.edit()
         editor.putString("uuid", uuid)
+        editor.commit()
+    }
+
+    fun getNick(context: Context): String {
+        val sharedPref = context.getSharedPreferences(SHARED_NAME, Context.MODE_PRIVATE)
+        return sharedPref.getString("nick", "").toString()
+    }
+    fun setNick(context: Context, nick: String) {
+        val sharedPref = context.getSharedPreferences(SHARED_NAME, Context.MODE_PRIVATE)
+        val editor = sharedPref.edit()
+        editor.putString("nick", nick)
         editor.commit()
     }
 
