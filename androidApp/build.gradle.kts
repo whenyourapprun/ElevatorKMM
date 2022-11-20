@@ -54,6 +54,8 @@ dependencies {
     implementation("androidx.appcompat:appcompat:1.5.1")
     implementation("com.google.android.material:material:1.7.0")
     implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.5.1")
+    // gson
+    implementation("com.google.code.gson:gson:2.9.0")
     // coroutines
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.4")
     // test

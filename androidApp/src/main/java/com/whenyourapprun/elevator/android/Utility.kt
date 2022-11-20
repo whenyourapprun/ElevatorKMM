@@ -1,15 +1,18 @@
 package com.whenyourapprun.elevator.android
 
 import android.content.Context
-import android.graphics.Bitmap
-import android.graphics.Matrix
 import android.os.Build
+import android.preference.PreferenceManager
 import android.util.DisplayMetrics
 import android.view.WindowInsets
 import android.view.WindowManager
+import com.google.gson.Gson
+import com.google.gson.reflect.TypeToken
 import com.whenyourapprun.elevator.Elevator
 import com.whenyourapprun.elevator.Item
+import org.json.JSONArray
 import java.util.*
+
 
 class Utility {
     companion object {
@@ -36,6 +39,24 @@ class Utility {
         val editor = sharedPref.edit()
         editor.putString("nick", nick)
         editor.commit()
+    }
+
+    fun getElevatorItems(context: Context): List<Item> {
+        val sharedPref = context.getSharedPreferences(SHARED_NAME, Context.MODE_PRIVATE)
+        val json = sharedPref.getString("itemList", null)
+
+        val storedData: List<Item> = Gson().fromJson(json, object : TypeToken<List<Item?>>() {}.type
+        )
+
+        return storedData
+    }
+
+    fun setElevatorItems(context: Context, itemList: List<Item>) {
+        val json = Gson().toJson(itemList)
+        val sharedPref = context.getSharedPreferences(SHARED_NAME, Context.MODE_PRIVATE)
+        val editor = sharedPref.edit()
+        editor.putString("itemList", json)
+        editor.apply()
     }
 
     fun objectIdToDate(id: String): Date {

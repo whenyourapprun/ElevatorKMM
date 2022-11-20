@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.activity.viewModels
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
@@ -36,6 +37,7 @@ class ElevatorActivity : ComponentActivity() {
     companion object {
         private const val TAG = "ElevatorActivity"
     }
+    private val util = Utility()
 
     @OptIn(ExperimentalComposeUiApi::class)
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -45,7 +47,6 @@ class ElevatorActivity : ComponentActivity() {
             ElevatorTheme {
                 val scaffoldState = rememberScaffoldState()
                 val scope = rememberCoroutineScope()
-                //var text by remember { mutableStateOf(TextFieldValue("")) }
                 var textFieldValue = remember {
                     mutableStateOf(
                         TextFieldValue(
@@ -130,6 +131,8 @@ class ElevatorActivity : ComponentActivity() {
                                             val elevatorNo = textFieldValue.value.text.replace("-", "")
                                             Log.d(TAG, "elevatorNo $elevatorNo")
                                             val itemList = Elevator().getElevatorInfo(elevatorNo).response.body.items
+                                            // 값 전달을 위해 내부 저장소에 저장
+                                            util.setElevatorItems(context, itemList)
                                             // 내부 디비에 결과 저장.
                                             val dbHelper = DBHelper(context)
                                             val sqlDB = dbHelper.writableDatabase
@@ -137,10 +140,8 @@ class ElevatorActivity : ComponentActivity() {
                                             val now = Calendar.getInstance().time
                                             val date = df.format(now)
                                             dbHelper.insertData(sqlDB, itemList[0].elevatorNo, itemList[0].buldNm, date)
-                                            // 값 전달을 어떻게 하지?
                                             // 일단 화면 전환을 하자.
                                             val intent = Intent(context, ElevatorResultActivity::class.java)
-
                                             context.startActivity(intent)
                                             finish()
                                         }
