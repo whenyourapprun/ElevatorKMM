@@ -21,7 +21,8 @@ class MyPageActivity : ComponentActivity() {
     companion object {
         private const val TAG = "MyPageActivity"
     }
-    
+    private val util = Utility()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {

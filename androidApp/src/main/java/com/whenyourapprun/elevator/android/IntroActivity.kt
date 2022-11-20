@@ -17,17 +17,24 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.whenyourapprun.elevator.android.ui.theme.ElevatorTheme
+import java.util.*
 import kotlin.concurrent.timer
 
 class IntroActivity : ComponentActivity() {
     companion object {
         private const val TAG = "IntroActivity"
     }
+    private val util = Utility()
     // 타이머에서 사용할 변수
     private var seconds by mutableStateOf(0)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        // uuid 한번만 실행
+        val uuid = util.getUUID(applicationContext)
+        if (uuid == "") {
+            util.setUUID(applicationContext, UUID.randomUUID().toString())
+        }
         setContent {
             ElevatorTheme {
                 val scaffoldState = rememberScaffoldState()
