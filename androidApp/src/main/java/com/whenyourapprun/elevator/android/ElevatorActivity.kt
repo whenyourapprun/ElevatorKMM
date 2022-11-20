@@ -1,5 +1,6 @@
 package com.whenyourapprun.elevator.android
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import androidx.activity.ComponentActivity
@@ -136,6 +137,12 @@ class ElevatorActivity : ComponentActivity() {
                                             val now = Calendar.getInstance().time
                                             val date = df.format(now)
                                             dbHelper.insertData(sqlDB, itemList[0].elevatorNo, itemList[0].buldNm, date)
+                                            // 값 전달을 어떻게 하지?
+                                            // 일단 화면 전환을 하자.
+                                            val intent = Intent(context, ElevatorResultActivity::class.java)
+
+                                            context.startActivity(intent)
+                                            finish()
                                         }
                                     },
                                     colors = ButtonDefaults.buttonColors(

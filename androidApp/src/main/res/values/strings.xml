@@ -45,4 +45,5 @@
     <string name="undgrndFloorCnt">Underground Floor Count</string>
     <string name="title_activity_my_page">MyPageActivity</string>
     <string name="title_activity_nick">NickActivity</string>
+    <string name="title_activity_elevator_result">ElevatorResultActivity</string>
 </resources>
