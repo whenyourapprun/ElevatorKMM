@@ -97,7 +97,7 @@ class ElevatorActivity : ComponentActivity() {
                                             selection = TextRange(newText.length)
                                         )
                                     },
-                                    label = { Text(stringResource(id = R.string.ElevatorInputGuide)) },
+                                    label = { Text(stringResource(id = R.string.ElevatorNoInput)) },
                                     placeholder = { Text(text = "8088-381") },
                                     keyboardOptions = KeyboardOptions(
                                         keyboardType = KeyboardType.Number,

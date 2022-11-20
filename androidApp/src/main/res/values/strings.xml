@@ -9,6 +9,7 @@
     <string name="NickSample">Nemesis</string>
     <string name="NickChangeGuide">You can edit the nickname used by the app.</string>
     <string name="NickInput">Nick Input</string>
+    <string name="ElevatorNoInput">Elevator No Input</string>
     <string name="ElevatorInputGuide">Enter the elevator number to check the information.</string>
     <string name="ElevatorInputWait">Waiting for the results for the elevator number.</string>
     <string name="OK">OK</string>
