@@ -1,6 +1,8 @@
 package com.whenyourapprun.elevator.android
 
+import android.app.Activity
 import android.content.Context
+import android.content.ContextWrapper
 import android.os.Build
 import android.preference.PreferenceManager
 import android.util.DisplayMetrics
@@ -64,41 +66,14 @@ class Utility {
         val x = hex.toLong(16) * 1000
         return Date(x)
     }
+}
 
-    fun dpToPx(dp: Int, displayMetrics: DisplayMetrics): Int {
-        return (dp * displayMetrics.density).toInt()
+// Compose 에서 해당 Activity 찾을 때 사용하는 함수
+fun Context.findActivity(): Activity {
+    var context = this
+    while (context is ContextWrapper) {
+        if (context is Activity) return context
+        context = context.baseContext
     }
-
-    fun pxToDp(px: Int, displayMetrics: DisplayMetrics): Int {
-        return (px / displayMetrics.density).toInt()
-    }
-
-    fun getScreenWidth(context: Context): Int {
-        val wm = context.getSystemService(Context.WINDOW_SERVICE) as WindowManager
-        return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
-            val windowMetrics = wm.currentWindowMetrics
-            val insets = windowMetrics.windowInsets
-                .getInsetsIgnoringVisibility(WindowInsets.Type.systemBars())
-            windowMetrics.bounds.width() - insets.left - insets.right
-        } else {
-            val displayMetrics = DisplayMetrics()
-            wm.defaultDisplay.getMetrics(displayMetrics)
-            displayMetrics.widthPixels
-        }
-    }
-
-    fun getScreenHeight(context: Context): Int {
-        val wm = context.getSystemService(Context.WINDOW_SERVICE) as WindowManager
-        return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
-            val windowMetrics = wm.currentWindowMetrics
-            val insets = windowMetrics.windowInsets
-                .getInsetsIgnoringVisibility(WindowInsets.Type.systemBars())
-            windowMetrics.bounds.height() - insets.bottom - insets.top
-        } else {
-            val displayMetrics = DisplayMetrics()
-            wm.defaultDisplay.getMetrics(displayMetrics)
-            displayMetrics.heightPixels
-        }
-    }
-
+    throw IllegalStateException("no activity")
 }
