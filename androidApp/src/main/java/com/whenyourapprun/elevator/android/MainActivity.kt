@@ -22,6 +22,11 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.compose.ui.viewinterop.AndroidView
+import com.google.android.gms.ads.AdListener
+import com.google.android.gms.ads.AdRequest
+import com.google.android.gms.ads.AdSize
+import com.google.android.gms.ads.AdView
 import com.whenyourapprun.elevator.android.ui.theme.*
 
 class MainActivity : ComponentActivity() {
@@ -44,6 +49,17 @@ class MainActivity : ComponentActivity() {
                             .padding(it)
                             .background(colorResource(id = R.color.back))
                     ) {
+                        // admob banner
+                        AndroidView(
+                            modifier = Modifier.fillMaxWidth(),
+                            factory = { context ->
+                                AdView(context).apply {
+                                    setAdSize(AdSize.BANNER)
+                                    adUnitId = context.getString(R.string.bannerId)
+                                    loadAd(AdRequest.Builder().build())
+                                }
+                            }
+                        )
                         // 가운데 90% 크기
                         Box(
                             modifier = Modifier
@@ -97,11 +113,11 @@ class MainActivity : ComponentActivity() {
                             }
                         }
                     }
-                }
-            }
-        }
-    }
-}
+                } // end_Scaffold
+            } // end_ElevatorTheme
+        } // end_setContent
+    } // end_onCreate
+} // end_MainActivity
 
 @Composable
 fun ContentCard(title: String, detail: String) {

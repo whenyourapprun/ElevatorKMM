@@ -45,8 +45,8 @@ class IntroActivity : ComponentActivity() {
         lifecycleScope.launch {
 
         }
-        // 타이머 생성
-        timer(period = 200) {
+        // 타이머 생성 period 200 줘야 광고 로딩 후 뜬다
+        timer(period = 10) {
             seconds++
             if (seconds > 100) {
                 // 타이머 중지

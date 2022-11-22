@@ -1,6 +1,8 @@
 <resources>
     <string name="openId" translatable="false">ca-app-pub-4377563560880478/1783165395</string>
     <string name="testOpenId" translatable="false">ca-app-pub-3940256099942544/3419835294</string>
+    <string name="bannerId" translatable="false">ca-app-pub-4377563560880478/2134588022</string>
+    <string name="fullId" translatable="false">ca-app-pub-4377563560880478/2489780390</string>
     <string name="app_name">Elevator</string>
     <string name="Elevator">Elevator</string>
     <string name="ElevatorGuide">You can find elevator information.</string>
