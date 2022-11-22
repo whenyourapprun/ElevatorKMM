@@ -242,12 +242,12 @@ class ElevatorResultActivity : ComponentActivity() {
                             }
                         }
                     }
-                }
-            }
-        }
-    }
+                } // end_Scaffold
+            } // end_ElevatorTheme
+        } // end_setContent
+    } // end_onCreate
 
-}
+} // end_ElevatorResultActivity
 
 @Composable
 fun RowContent(title: String, content: String) {

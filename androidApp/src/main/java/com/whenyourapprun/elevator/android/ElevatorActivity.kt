@@ -27,22 +27,32 @@ import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.unit.dp
+import androidx.core.content.ContextCompat
+import com.google.android.gms.ads.*
+import com.google.android.gms.ads.rewarded.RewardItem
+import com.google.android.gms.ads.rewardedinterstitial.RewardedInterstitialAd
+import com.google.android.gms.ads.rewardedinterstitial.RewardedInterstitialAdLoadCallback
 import com.whenyourapprun.elevator.Elevator
 import com.whenyourapprun.elevator.android.ui.theme.ElevatorTheme
 import kotlinx.coroutines.launch
 import java.text.SimpleDateFormat
 import java.util.Calendar
 
-class ElevatorActivity : ComponentActivity() {
+class ElevatorActivity : ComponentActivity(), OnUserEarnedRewardListener {
     companion object {
         private const val TAG = "ElevatorActivity"
     }
     private val util = Utility()
+    // reward full ad
+    private var rewardedInterstitialAd: RewardedInterstitialAd? = null
 
     @OptIn(ExperimentalComposeUiApi::class)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
+        // AdMob
+        MobileAds.initialize(this) { initializationStatus ->
+            loadAd()
+        }
         setContent {
             ElevatorTheme {
                 val scaffoldState = rememberScaffoldState()
@@ -140,10 +150,14 @@ class ElevatorActivity : ComponentActivity() {
                                             val now = Calendar.getInstance().time
                                             val date = df.format(now)
                                             dbHelper.insertData(sqlDB, itemList[0].elevatorNo, itemList[0].buldNm, date)
-                                            // 일단 화면 전환을 하자.
-                                            val intent = Intent(context, ElevatorResultActivity::class.java)
-                                            context.startActivity(intent)
-                                            finish()
+                                            // 광고 로딩 되었으면 띄운다.
+                                            if (rewardedInterstitialAd != null) {
+                                                rewardedInterstitialAd?.show(this@ElevatorActivity, this@ElevatorActivity)
+                                            } else {
+                                                val intent = Intent(context, ElevatorResultActivity::class.java)
+                                                context.startActivity(intent)
+                                                finish()
+                                            }
                                         }
                                     },
                                     colors = ButtonDefaults.buttonColors(
@@ -162,4 +176,51 @@ class ElevatorActivity : ComponentActivity() {
             }
         }
     }
-}
+    private fun loadAd() {
+        RewardedInterstitialAd.load(this, getString(R.string.rewardFullId),
+            AdRequest.Builder().build(), object : RewardedInterstitialAdLoadCallback() {
+                override fun onAdLoaded(ad: RewardedInterstitialAd) {
+                    Log.d(TAG, "Ad was loaded.")
+                    rewardedInterstitialAd = ad
+                    // callback
+                    rewardedInterstitialAd?.fullScreenContentCallback = object: FullScreenContentCallback() {
+                        override fun onAdClicked() {
+                            // Called when a click is recorded for an ad.
+                            Log.d(TAG, "Ad was clicked.")
+                        }
+                        override fun onAdDismissedFullScreenContent() {
+                            // Called when ad is dismissed.
+                            // Set the ad reference to null so you don't show the ad a second time.
+                            Log.d(TAG, "Ad dismissed fullscreen content.")
+                            rewardedInterstitialAd = null
+                            // 광고 화면이 끝나면 ElevatorResultActivity 이동
+                            val intent = Intent(applicationContext, ElevatorResultActivity::class.java)
+                            startActivity(intent)
+                            finish()
+                        }
+                        override fun onAdFailedToShowFullScreenContent(adError: AdError) {
+                            // Called when ad fails to show.
+                            Log.e(TAG, "Ad failed to show fullscreen content.")
+                            rewardedInterstitialAd = null
+                        }
+                        override fun onAdImpression() {
+                            // Called when an impression is recorded for an ad.
+                            Log.d(TAG, "Ad recorded an impression.")
+                        }
+                        override fun onAdShowedFullScreenContent() {
+                            // Called when ad is shown.
+                            Log.d(TAG, "Ad showed fullscreen content.")
+                        }
+                    }
+                }
+                override fun onAdFailedToLoad(adError: LoadAdError) {
+                    adError?.toString()?.let { Log.d(TAG, it) }
+                    rewardedInterstitialAd = null
+                }
+            })
+    }
+
+    override fun onUserEarnedReward(rewardItem: RewardItem) {
+        Log.d(TAG, "User earned reward.")
+    }
+} // end_ElevatorActivity
