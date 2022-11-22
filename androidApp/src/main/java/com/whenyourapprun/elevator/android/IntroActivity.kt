@@ -2,6 +2,8 @@ package com.whenyourapprun.elevator.android
 
 import android.content.Intent
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.background
@@ -16,7 +18,12 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.lifecycle.lifecycleScope
+import com.google.android.gms.ads.MobileAds
+import com.google.android.gms.ads.RequestConfiguration
 import com.whenyourapprun.elevator.android.ui.theme.ElevatorTheme
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import java.util.*
 import kotlin.concurrent.timer
 
@@ -35,6 +42,42 @@ class IntroActivity : ComponentActivity() {
         if (uuid == "") {
             util.setUUID(applicationContext, UUID.randomUUID().toString())
         }
+        lifecycleScope.launch {
+
+        }
+        // 타이머 생성
+        timer(period = 200) {
+            seconds++
+            if (seconds > 100) {
+                // 타이머 중지
+                this.cancel()
+                // countdown finish 오프닝 광고 띄우기 위해
+                val application = application as? MyApplication
+                if (application == null) {
+                    // 메인화면으로 이동
+                    val intent = Intent(applicationContext, MainActivity::class.java)
+                    startActivity(intent)
+                    finish()
+                }
+                lifecycleScope.launch(Dispatchers.Main) {
+                    // Show the app open ad.
+                    application?.showAdIfAvailable(this@IntroActivity, object : MyApplication.OnShowAdCompleteListener {
+                        override fun onShowAdComplete() {
+                            // 메인화면으로 이동
+                            val intent = Intent(applicationContext, MainActivity::class.java)
+                            startActivity(intent)
+                            finish()
+                        }
+                    })
+                }
+
+            }
+        }
+        // AdMob 초기화
+        MobileAds.initialize(this) {}
+        MobileAds.setRequestConfiguration(
+            RequestConfiguration.Builder().setTestDeviceIds(listOf("ABCDEF012345")).build()
+        )
         setContent {
             ElevatorTheme {
                 val scaffoldState = rememberScaffoldState()
@@ -82,18 +125,6 @@ class IntroActivity : ComponentActivity() {
                         }
                     }
                 }
-            }
-        }
-        // 타이머 생성
-        timer(period = 50) {
-            seconds++
-            if (seconds > 100) {
-                // 타이머 중지
-                this.cancel()
-                // 메인화면으로 이동
-                val intent = Intent(applicationContext, MainActivity::class.java)
-                startActivity(intent)
-                finish()
             }
         }
     }

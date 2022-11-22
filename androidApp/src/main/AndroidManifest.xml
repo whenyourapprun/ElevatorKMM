@@ -4,35 +4,24 @@
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application
+        android:name=".MyApplication"
         android:allowBackup="false"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
         <activity
             android:name=".ElevatorResultActivity"
-            android:exported="false"
-            android:label="@string/title_activity_elevator_result"
-            android:theme="@style/AppTheme">
-            <meta-data
-                android:name="android.app.lib_name"
-                android:value="" />
-        </activity>
+            android:exported="false" />
         <activity
             android:name=".NickActivity"
             android:exported="false"
-            android:label="@string/title_activity_nick"
-            android:theme="@style/AppTheme"
             android:windowSoftInputMode="adjustResize" />
         <activity
             android:name=".MyPageActivity"
-            android:exported="false"
-            android:label="@string/title_activity_my_page"
-            android:theme="@style/AppTheme" />
+            android:exported="false" />
         <activity
             android:name=".ElevatorActivity"
             android:exported="false"
-            android:label="@string/title_activity_elevator"
-            android:theme="@style/AppTheme"
             android:windowSoftInputMode="adjustResize" />
         <activity
             android:name=".IntroActivity"
@@ -46,6 +35,9 @@
         <activity
             android:name=".MainActivity"
             android:exported="false" />
+        <meta-data
+            android:name="com.google.android.gms.ads.APPLICATION_ID"
+            android:value="ca-app-pub-4377563560880478~4760751363" />
     </application>
 
 </manifest>

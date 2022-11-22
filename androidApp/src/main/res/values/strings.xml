@@ -1,6 +1,7 @@
 <resources>
+    <string name="openId" translatable="false">ca-app-pub-4377563560880478/1783165395</string>
+    <string name="testOpenId" translatable="false">ca-app-pub-3940256099942544/3419835294</string>
     <string name="app_name">Elevator</string>
-    <string name="title_activity_elevator">ElevatorActivity</string>
     <string name="Elevator">Elevator</string>
     <string name="ElevatorGuide">You can find elevator information.</string>
     <string name="MyPage">My Page</string>
@@ -44,7 +45,4 @@
     <string name="shuttleSection">Shuttle Section</string>
     <string name="sigunguNm">city and county name</string>
     <string name="undgrndFloorCnt">Underground Floor Count</string>
-    <string name="title_activity_my_page">MyPageActivity</string>
-    <string name="title_activity_nick">NickActivity</string>
-    <string name="title_activity_elevator_result">ElevatorResultActivity</string>
 </resources>

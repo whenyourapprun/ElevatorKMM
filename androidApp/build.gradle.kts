@@ -53,11 +53,16 @@ dependencies {
     implementation("androidx.activity:activity-compose:1.6.1")
     implementation("androidx.appcompat:appcompat:1.5.1")
     implementation("com.google.android.material:material:1.7.0")
-    implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.5.1")
     // gson
     implementation("com.google.code.gson:gson:2.9.0")
     // coroutines
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.4")
+    implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.5.1")
+    // ads
+    implementation("com.google.android.gms:play-services-ads:21.3.0")
+    implementation("androidx.lifecycle:lifecycle-runtime:2.5.1")
+    implementation("androidx.lifecycle:lifecycle-process:2.5.1")
+    implementation("androidx.lifecycle:lifecycle-common-java8:2.5.1")
     // test
     androidTestImplementation("androidx.compose.ui:ui-test-junit4:1.3.1")
     debugImplementation("androidx.compose.ui:ui-test-manifest:1.3.1")
