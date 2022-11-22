@@ -16,6 +16,7 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.stringResource
@@ -23,7 +24,6 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.viewinterop.AndroidView
-import com.google.android.gms.ads.AdListener
 import com.google.android.gms.ads.AdRequest
 import com.google.android.gms.ads.AdSize
 import com.google.android.gms.ads.AdView
@@ -40,6 +40,7 @@ class MainActivity : ComponentActivity() {
             ElevatorTheme {
                 val scaffoldState = rememberScaffoldState()
                 val scope = rememberCoroutineScope()
+                val adWidth = LocalConfiguration.current.screenWidthDp
                 // 발판 사용 - 머터리얼
                 Scaffold(scaffoldState = scaffoldState) {
                     // 전체 적용 및 배경 색상 설정
@@ -54,7 +55,9 @@ class MainActivity : ComponentActivity() {
                             modifier = Modifier.fillMaxWidth(),
                             factory = { context ->
                                 AdView(context).apply {
-                                    setAdSize(AdSize.BANNER)
+                                    setAdSize(
+                                        AdSize.getCurrentOrientationAnchoredAdaptiveBannerAdSize(context, adWidth)
+                                    )
                                     adUnitId = context.getString(R.string.bannerId)
                                     loadAd(AdRequest.Builder().build())
                                 }
