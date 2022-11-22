@@ -89,7 +89,6 @@ class MainActivity : ComponentActivity() {
                                             .padding(16.dp)
                                             .fillMaxSize()
                                             .clickable {
-                                                // 선택한 곳에 따라 이동
                                                 // 광고가 로딩 되었으면 광고 부터 보이자
                                                 if (fullAd != null) {
                                                     fullAd?.show(context.findActivity())

@@ -2,6 +2,7 @@ package com.whenyourapprun.elevator.android
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.background
@@ -20,6 +21,9 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.google.android.gms.ads.*
+import com.google.android.gms.ads.interstitial.InterstitialAd
+import com.google.android.gms.ads.interstitial.InterstitialAdLoadCallback
 import com.whenyourapprun.elevator.Item
 import com.whenyourapprun.elevator.android.ui.theme.ElevatorTheme
 
@@ -29,10 +33,16 @@ class ElevatorResultActivity : ComponentActivity() {
     }
     private val util = Utility()
     private lateinit var elevatorItemList: List<Item>
+    // full_ad
+    private var fullAd: InterstitialAd? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         elevatorItemList = util.getElevatorItems(applicationContext)
+        // 전면 광고
+        MobileAds.initialize(this) {
+            loadAd()
+        }
         setContent {
             ElevatorTheme {
                 val scaffoldState = rememberScaffoldState()
@@ -226,10 +236,15 @@ class ElevatorResultActivity : ComponentActivity() {
                                     .height(100.dp)
                                     .padding(16.dp),
                                 onClick = {
-                                    // 일단 화면 전환을 하자.
-                                    val intent = Intent(context, MainActivity::class.java)
-                                    context.startActivity(intent)
-                                    finish()
+                                    // 광고가 로딩 되었으면 광고 부터 보이자
+                                    if (fullAd != null) {
+                                        fullAd?.show(context.findActivity())
+                                    } else {
+                                        // 메인 화면 이동
+                                        val intent = Intent(context, MainActivity::class.java)
+                                        context.startActivity(intent)
+                                        finish()
+                                    }
                                 },
                                 colors = ButtonDefaults.buttonColors(
                                     backgroundColor = colorResource(id = R.color.selected),
@@ -247,6 +262,52 @@ class ElevatorResultActivity : ComponentActivity() {
         } // end_setContent
     } // end_onCreate
 
+    private fun loadAd() {
+        InterstitialAd.load(
+            this,
+            getString(R.string.fullId),
+            AdRequest.Builder().build(),
+            object : InterstitialAdLoadCallback() {
+                override fun onAdLoaded(ad: InterstitialAd) {
+                    Log.d(TAG, "Ad was loaded.")
+                    fullAd = ad
+                    ad.fullScreenContentCallback = object: FullScreenContentCallback() {
+                        override fun onAdClicked() {
+                            // Called when a click is recorded for an ad.
+                            Log.d(TAG, "Ad was clicked.")
+                        }
+                        override fun onAdDismissedFullScreenContent() {
+                            // Called when ad is dismissed.
+                            // Set the ad reference to null so you don't show the ad a second time.
+                            Log.d(TAG, "Ad dismissed fullscreen content.")
+                            fullAd = null
+                            // 광고를 다 보고 창을 닫을 때 메인 화면 이동
+                            val intent = Intent(applicationContext, MainActivity::class.java)
+                            startActivity(intent)
+                            finish()
+                        }
+                        override fun onAdFailedToShowFullScreenContent(adError: AdError) {
+                            // Called when ad fails to show.
+                            Log.e(TAG, "Ad failed to show fullscreen content.")
+                            fullAd = null
+                        }
+                        override fun onAdImpression() {
+                            // Called when an impression is recorded for an ad.
+                            Log.d(TAG, "Ad recorded an impression.")
+                        }
+                        override fun onAdShowedFullScreenContent() {
+                            // Called when ad is shown.
+                            Log.d(TAG, "Ad showed fullscreen content.")
+                        }
+                    }
+                }
+                override fun onAdFailedToLoad(adError: LoadAdError) {
+                    adError?.toString()?.let { Log.d(TAG, it) }
+                    fullAd = null
+                }
+            }
+        )
+    }
 } // end_ElevatorResultActivity
 
 @Composable
