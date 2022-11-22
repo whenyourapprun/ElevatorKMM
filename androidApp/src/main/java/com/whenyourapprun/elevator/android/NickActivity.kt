@@ -129,10 +129,10 @@ class NickActivity : ComponentActivity(), OnUserEarnedRewardListener {
                             }
                         }
                     }
-                }
-            }
-        }
-    }
+                } // end_Scaffold
+            } // end_ElevatorTheme
+        } // end_setContent
+    } // end_onCreate
 
     private fun loadAd() {
         RewardedInterstitialAd.load(this, getString(R.string.rewardFullId),
