@@ -25,18 +25,28 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.unit.dp
+import com.google.android.gms.ads.*
+import com.google.android.gms.ads.rewarded.RewardItem
+import com.google.android.gms.ads.rewardedinterstitial.RewardedInterstitialAd
+import com.google.android.gms.ads.rewardedinterstitial.RewardedInterstitialAdLoadCallback
 import com.whenyourapprun.elevator.android.ui.theme.ElevatorTheme
 import kotlinx.coroutines.launch
 
-class NickActivity : ComponentActivity() {
+class NickActivity : ComponentActivity(), OnUserEarnedRewardListener {
     companion object {
         private const val TAG = "NickActivity"
     }
     private val util = Utility()
+    // reward full ad
+    private var rewardedInterstitialAd: RewardedInterstitialAd? = null
 
     @OptIn(ExperimentalComposeUiApi::class)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        // AdMob
+        MobileAds.initialize(this) { initializationStatus ->
+            loadAd()
+        }
         setContent {
             ElevatorTheme {
                 val scaffoldState = rememberScaffoldState()
@@ -96,11 +106,16 @@ class NickActivity : ComponentActivity() {
                                         if (text != "") {
                                             util.setNick(context = context, text)
                                         }
-                                        // 메인 창으로 이동
-                                        val intent = Intent(context, MainActivity::class.java)
-                                        context.startActivity(intent)
-                                        // 뒤로 가기 했을 때 나오지 않도록 종료
-                                        finish()
+                                        // 광고 로딩 되었으면 띄운다.
+                                        if (rewardedInterstitialAd != null) {
+                                            rewardedInterstitialAd?.show(this@NickActivity, this@NickActivity)
+                                        } else {
+                                            // 메인 창으로 이동
+                                            val intent = Intent(context, MainActivity::class.java)
+                                            context.startActivity(intent)
+                                            // 뒤로 가기 했을 때 나오지 않도록 종료
+                                            finish()
+                                        }
                                     },
                                     colors = ButtonDefaults.buttonColors(
                                         backgroundColor = colorResource(id = R.color.selected),
@@ -118,4 +133,53 @@ class NickActivity : ComponentActivity() {
             }
         }
     }
-}
+
+    private fun loadAd() {
+        RewardedInterstitialAd.load(this, getString(R.string.rewardFullId),
+            AdRequest.Builder().build(), object : RewardedInterstitialAdLoadCallback() {
+                override fun onAdLoaded(ad: RewardedInterstitialAd) {
+                    Log.d(TAG, "Ad was loaded.")
+                    rewardedInterstitialAd = ad
+                    // callback
+                    rewardedInterstitialAd?.fullScreenContentCallback = object: FullScreenContentCallback() {
+                        override fun onAdClicked() {
+                            // Called when a click is recorded for an ad.
+                            Log.d(TAG, "Ad was clicked.")
+                        }
+                        override fun onAdDismissedFullScreenContent() {
+                            // Called when ad is dismissed.
+                            // Set the ad reference to null so you don't show the ad a second time.
+                            Log.d(TAG, "Ad dismissed fullscreen content.")
+                            rewardedInterstitialAd = null
+                            // 광고 화면이 끝나면 메인 창으로 이동
+                            val intent = Intent(applicationContext, MainActivity::class.java)
+                            startActivity(intent)
+                            // 뒤로 가기 했을 때 나오지 않도록 종료
+                            finish()
+                        }
+                        override fun onAdFailedToShowFullScreenContent(adError: AdError) {
+                            // Called when ad fails to show.
+                            Log.e(TAG, "Ad failed to show fullscreen content.")
+                            rewardedInterstitialAd = null
+                        }
+                        override fun onAdImpression() {
+                            // Called when an impression is recorded for an ad.
+                            Log.d(TAG, "Ad recorded an impression.")
+                        }
+                        override fun onAdShowedFullScreenContent() {
+                            // Called when ad is shown.
+                            Log.d(TAG, "Ad showed fullscreen content.")
+                        }
+                    }
+                }
+                override fun onAdFailedToLoad(adError: LoadAdError) {
+                    adError?.toString()?.let { Log.d(TAG, it) }
+                    rewardedInterstitialAd = null
+                }
+            })
+    }
+
+    override fun onUserEarnedReward(rewardItem: RewardItem) {
+        Log.d(TAG, "User earned reward.")
+    }
+} // end_NickActivity

@@ -176,6 +176,7 @@ class ElevatorActivity : ComponentActivity(), OnUserEarnedRewardListener {
             }
         }
     }
+
     private fun loadAd() {
         RewardedInterstitialAd.load(this, getString(R.string.rewardFullId),
             AdRequest.Builder().build(), object : RewardedInterstitialAdLoadCallback() {
