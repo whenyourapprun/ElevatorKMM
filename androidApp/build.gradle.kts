@@ -7,7 +7,7 @@ android {
     namespace = "com.whenyourapprun.elevator.android"
     compileSdk = 33
     defaultConfig {
-        applicationId = "com.whenyourapprun.elevator.android"
+        applicationId = "com.whenyourapprun.elevator"
         minSdk = 23
         targetSdk = 33
         versionCode = 6
