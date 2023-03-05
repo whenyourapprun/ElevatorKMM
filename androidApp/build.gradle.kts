@@ -10,7 +10,7 @@ android {
         applicationId = "com.whenyourapprun.elevator"
         minSdk = 23
         targetSdk = 33
-        versionCode = 6
+        versionCode = 7
         versionName = "1.5.1"
         vectorDrawables {
             useSupportLibrary = true
