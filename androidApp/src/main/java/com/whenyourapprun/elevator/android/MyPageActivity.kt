@@ -44,7 +44,7 @@ class MyPageActivity : ComponentActivity() {
     private var nick = ""
     private var playItemList = ArrayList<PlayItem>()
     // full_ad
-    private var fullAd: InterstitialAd? = null
+    //private var fullAd: InterstitialAd? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -67,9 +67,9 @@ class MyPageActivity : ComponentActivity() {
         }
         Log.d(TAG, "playItemList count ${playItemList.count()}")
         // 전면 광고
-        MobileAds.initialize(this) {
-            loadAd()
-        }
+        //MobileAds.initialize(this) {
+        //    loadAd()
+        //}
         setContent {
             ElevatorTheme {
                 val scaffoldState = rememberScaffoldState()
@@ -213,13 +213,13 @@ class MyPageActivity : ComponentActivity() {
                                     .padding(horizontal = 16.dp),
                                 onClick = {
                                     // 광고가 로딩 되었으면 광고 부터 보이자
-                                    if (fullAd != null) {
-                                        fullAd?.show(context.findActivity())
-                                    } else {
+                                    //if (fullAd != null) {
+                                    //    fullAd?.show(context.findActivity())
+                                    //} else {
                                         // 일단 화면 전환을 하자.
                                         val intent = Intent(context, MainActivity::class.java)
                                         context.startActivity(intent)
-                                    }
+                                    //}
                                 },
                                 colors = ButtonDefaults.buttonColors(
                                     backgroundColor = colorResource(id = R.color.selected),
@@ -237,6 +237,7 @@ class MyPageActivity : ComponentActivity() {
         } // end_setContent
     } // end_onCreate
 
+    /*
     private fun loadAd() {
         InterstitialAd.load(
             this,
@@ -282,4 +283,6 @@ class MyPageActivity : ComponentActivity() {
             }
         )
     }
+
+     */
 } // end_MyPageActivity

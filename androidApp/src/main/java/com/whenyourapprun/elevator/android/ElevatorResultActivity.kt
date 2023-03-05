@@ -34,15 +34,15 @@ class ElevatorResultActivity : ComponentActivity() {
     private val util = Utility()
     private lateinit var elevatorItemList: List<Item>
     // full_ad
-    private var fullAd: InterstitialAd? = null
+    //private var fullAd: InterstitialAd? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         elevatorItemList = util.getElevatorItems(applicationContext)
         // 전면 광고
-        MobileAds.initialize(this) {
-            loadAd()
-        }
+        //MobileAds.initialize(this) {
+        //    loadAd()
+        //}
         setContent {
             ElevatorTheme {
                 val scaffoldState = rememberScaffoldState()
@@ -237,14 +237,14 @@ class ElevatorResultActivity : ComponentActivity() {
                                     .padding(16.dp),
                                 onClick = {
                                     // 광고가 로딩 되었으면 광고 부터 보이자
-                                    if (fullAd != null) {
-                                        fullAd?.show(context.findActivity())
-                                    } else {
+                                    //if (fullAd != null) {
+                                    //    fullAd?.show(context.findActivity())
+                                    //} else {
                                         // 메인 화면 이동
                                         val intent = Intent(context, MainActivity::class.java)
                                         context.startActivity(intent)
                                         finish()
-                                    }
+                                    //}
                                 },
                                 colors = ButtonDefaults.buttonColors(
                                     backgroundColor = colorResource(id = R.color.selected),
@@ -262,6 +262,7 @@ class ElevatorResultActivity : ComponentActivity() {
         } // end_setContent
     } // end_onCreate
 
+    /*
     private fun loadAd() {
         InterstitialAd.load(
             this,
@@ -308,6 +309,8 @@ class ElevatorResultActivity : ComponentActivity() {
             }
         )
     }
+
+     */
 } // end_ElevatorResultActivity
 
 @Composable

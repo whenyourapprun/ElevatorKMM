@@ -38,21 +38,22 @@ import kotlinx.coroutines.launch
 import java.text.SimpleDateFormat
 import java.util.Calendar
 
-class ElevatorActivity : ComponentActivity(), OnUserEarnedRewardListener {
+//class ElevatorActivity : ComponentActivity(), OnUserEarnedRewardListener {
+class ElevatorActivity : ComponentActivity() {
     companion object {
         private const val TAG = "ElevatorActivity"
     }
     private val util = Utility()
     // reward full ad
-    private var rewardedInterstitialAd: RewardedInterstitialAd? = null
+    //private var rewardedInterstitialAd: RewardedInterstitialAd? = null
 
     @OptIn(ExperimentalComposeUiApi::class)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         // AdMob
-        MobileAds.initialize(this) { initializationStatus ->
-            loadAd()
-        }
+        //MobileAds.initialize(this) { initializationStatus ->
+        //    loadAd()
+        //}
         setContent {
             ElevatorTheme {
                 val scaffoldState = rememberScaffoldState()
@@ -151,13 +152,13 @@ class ElevatorActivity : ComponentActivity(), OnUserEarnedRewardListener {
                                             val date = df.format(now)
                                             dbHelper.insertData(sqlDB, itemList[0].elevatorNo, itemList[0].buldNm, date)
                                             // 광고 로딩 되었으면 띄운다.
-                                            if (rewardedInterstitialAd != null) {
-                                                rewardedInterstitialAd?.show(this@ElevatorActivity, this@ElevatorActivity)
-                                            } else {
+                                            //if (rewardedInterstitialAd != null) {
+                                            //    rewardedInterstitialAd?.show(this@ElevatorActivity, this@ElevatorActivity)
+                                            //} else {
                                                 val intent = Intent(context, ElevatorResultActivity::class.java)
                                                 context.startActivity(intent)
                                                 finish()
-                                            }
+                                            //}
                                         }
                                     },
                                     colors = ButtonDefaults.buttonColors(
@@ -177,6 +178,7 @@ class ElevatorActivity : ComponentActivity(), OnUserEarnedRewardListener {
         }
     }
 
+    /*
     private fun loadAd() {
         RewardedInterstitialAd.load(this, getString(R.string.rewardFullId),
             AdRequest.Builder().build(), object : RewardedInterstitialAdLoadCallback() {
@@ -224,4 +226,6 @@ class ElevatorActivity : ComponentActivity(), OnUserEarnedRewardListener {
     override fun onUserEarnedReward(rewardItem: RewardItem) {
         Log.d(TAG, "User earned reward.")
     }
+
+     */
 } // end_ElevatorActivity

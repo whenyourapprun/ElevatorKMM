@@ -32,21 +32,21 @@ import com.google.android.gms.ads.rewardedinterstitial.RewardedInterstitialAdLoa
 import com.whenyourapprun.elevator.android.ui.theme.ElevatorTheme
 import kotlinx.coroutines.launch
 
-class NickActivity : ComponentActivity(), OnUserEarnedRewardListener {
+class NickActivity : ComponentActivity() {
     companion object {
         private const val TAG = "NickActivity"
     }
     private val util = Utility()
     // reward full ad
-    private var rewardedInterstitialAd: RewardedInterstitialAd? = null
+    //private var rewardedInterstitialAd: RewardedInterstitialAd? = null
 
     @OptIn(ExperimentalComposeUiApi::class)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         // AdMob
-        MobileAds.initialize(this) { initializationStatus ->
-            loadAd()
-        }
+        //MobileAds.initialize(this) { initializationStatus ->
+        //    loadAd()
+        //}
         setContent {
             ElevatorTheme {
                 val scaffoldState = rememberScaffoldState()
@@ -107,15 +107,15 @@ class NickActivity : ComponentActivity(), OnUserEarnedRewardListener {
                                             util.setNick(context = context, text)
                                         }
                                         // 광고 로딩 되었으면 띄운다.
-                                        if (rewardedInterstitialAd != null) {
-                                            rewardedInterstitialAd?.show(this@NickActivity, this@NickActivity)
-                                        } else {
+                                        //if (rewardedInterstitialAd != null) {
+                                        //    rewardedInterstitialAd?.show(this@NickActivity, this@NickActivity)
+                                        //} else {
                                             // 메인 창으로 이동
                                             val intent = Intent(context, MainActivity::class.java)
                                             context.startActivity(intent)
                                             // 뒤로 가기 했을 때 나오지 않도록 종료
                                             finish()
-                                        }
+                                        //}
                                     },
                                     colors = ButtonDefaults.buttonColors(
                                         backgroundColor = colorResource(id = R.color.selected),
@@ -134,6 +134,7 @@ class NickActivity : ComponentActivity(), OnUserEarnedRewardListener {
         } // end_setContent
     } // end_onCreate
 
+    /*
     private fun loadAd() {
         RewardedInterstitialAd.load(this, getString(R.string.rewardFullId),
             AdRequest.Builder().build(), object : RewardedInterstitialAdLoadCallback() {
@@ -182,4 +183,6 @@ class NickActivity : ComponentActivity(), OnUserEarnedRewardListener {
     override fun onUserEarnedReward(rewardItem: RewardItem) {
         Log.d(TAG, "User earned reward.")
     }
+
+     */
 } // end_NickActivity

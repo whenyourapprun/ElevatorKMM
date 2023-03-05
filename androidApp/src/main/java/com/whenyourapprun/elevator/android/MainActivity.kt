@@ -1,10 +1,6 @@
 package com.whenyourapprun.elevator.android
 
-import android.app.Activity
-import android.content.ContentValues
 import android.content.ContentValues.TAG
-import android.content.Context
-import android.content.ContextWrapper
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
@@ -29,8 +25,6 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.viewinterop.AndroidView
 import com.google.android.gms.ads.*
-import com.google.android.gms.ads.interstitial.InterstitialAd
-import com.google.android.gms.ads.interstitial.InterstitialAdLoadCallback
 import com.whenyourapprun.elevator.android.ui.theme.*
 
 class MainActivity : ComponentActivity() {
@@ -38,14 +32,14 @@ class MainActivity : ComponentActivity() {
         private const val TAG = "MainActivity"
     }
     // full_ad
-    private var fullAd: InterstitialAd? = null
+    //private var fullAd: InterstitialAd? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         // 전면 광고
-        MobileAds.initialize(this) {
-            loadAd()
-        }
+        //MobileAds.initialize(this) {
+        //    loadAd()
+        //}
         setContent {
             ElevatorTheme {
                 val scaffoldState = rememberScaffoldState()
@@ -90,15 +84,15 @@ class MainActivity : ComponentActivity() {
                                             .fillMaxSize()
                                             .clickable {
                                                 // 광고가 로딩 되었으면 광고 부터 보이자
-                                                if (fullAd != null) {
-                                                    fullAd?.show(context.findActivity())
-                                                } else {
+                                                //if (fullAd != null) {
+                                                //    fullAd?.show(context.findActivity())
+                                                //} else {
                                                     val intent = Intent(
                                                         context,
                                                         ElevatorActivity::class.java
                                                     )
                                                     context.startActivity(intent)
-                                                }
+                                                //}
                                             },
                                         shape = RoundedCornerShape(16.dp)
                                     ) {
@@ -171,6 +165,7 @@ class MainActivity : ComponentActivity() {
         } // end_setContent
     } // end_onCreate
 
+    /*
     private fun loadAd() {
         InterstitialAd.load(
             this,
@@ -216,6 +211,7 @@ class MainActivity : ComponentActivity() {
             }
         )
     }
+     */
 } // end_MainActivity
 
 @Composable
